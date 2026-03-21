@@ -13,21 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "skills/feature-auto-pipeline/SKILL.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "SKILL"
-            }
-          },
-          {
-            "id": "26d332bac9fec885",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "skills/feature-task-planning/SKILL.md",
+                "file": "skills/feature/feature-implementation/SKILL.md",
                 "mode": "source",
                 "source": false
               },
@@ -35,8 +21,7 @@
               "title": "SKILL"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -171,7 +156,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "skills/feature-task-planning/SKILL.md",
+                "file": "skills/feature/feature-implementation/SKILL.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -198,43 +183,43 @@
       "bases:新建数据库": false
     }
   },
-  "active": "26d332bac9fec885",
+  "active": "4a50c7827112e268",
   "lastOpenFiles": [
-    "skills/feature-task-planning/assets/feature-task-planning-template.md",
+    "CLAUDE.md.tmp.50340.1774073784312",
+    "skills/feature-auto-pipeline/SKILL.md",
     "skills/feature-task-planning/SKILL.md",
-    "skills/feature-tech-design/SKILL.md",
-    "skills/feature-requirements-clarification/assets/feature-requirements-template.md",
-    "skills/feature-requirements-clarification/SKILL.md",
-    "skills/feature-implementation/SKILL.md",
-    "skills/project-roadmap-planning/assets/roadmap-planning-template.md",
-    "skills/project-roadmap-planning/SKILL.md",
-    "skills/project-roadmap-planning/assets",
-    "skills/project-roadmap-planning",
-    "skills/project-product-overview/assets/product-overview-template.md",
-    "skills/project-product-overview/SKILL.md",
-    "skills/project-product-overview/assets",
-    "skills/project-product-overview",
-    "skills/project-tech-stack/assets/tech-stack-template.md",
-    "skills/project-tech-stack/SKILL.md",
-    "skills/project-tech-stack/assets",
-    "skills/project-tech-stack",
-    "skills/project-structure/assets/project-structure-template.md",
-    "skills/project-structure/assets",
-    "skills/project-structure/SKILL.md",
-    "skills/project-structure",
-    "skills/project-requirements-clarification/assets/requirements-clarification-template.md",
-    "skills/project-requirements-clarification/SKILL.md",
-    "skills/project-requirements-clarification/assets",
-    "skills/project-requirements-clarification",
-    "skills/project-initialization/assets/initialization-log-template.md",
-    "skills/project-initialization/SKILL.md",
-    "skills/feature-implementation/assets/stage-completion-report-template.md",
-    "skills/docs-update/SKILL.md",
-    "skills/bugfix-workflow/assets/bugfix-report-template.md",
-    "skills/bugfix-workflow/SKILL.md",
-    "skills/prompt-master/references/templates.md",
-    "skills/prompt-master/references/patterns.md",
-    "skills/prompt-master/SKILL.md",
-    "skills/prompt-master/WARP.md"
+    "skills/feature/feature-auto-pipeline/assets/sub-agent-prompt-template.md",
+    "skills/feature/feature-auto-pipeline/SKILL.md",
+    "skills/feature/feature-auto-pipeline/assets",
+    "skills/feature/feature-auto-pipeline",
+    "skills/feature/feature-evolution/assets/feature-evolution-template.md",
+    "skills/feature/feature-evolution/SKILL.md",
+    "skills/feature/feature-evolution/assets",
+    "skills/feature/feature-evolution",
+    "skills/feature/feature-implementation/assets/stage-completion-report-template.md",
+    "skills/feature/feature-implementation/SKILL.md",
+    "skills/feature/feature-implementation/assets",
+    "skills/feature/feature-implementation",
+    "skills/feature/feature-task-planning/assets/feature-task-planning-template.md",
+    "skills/feature/feature-task-planning/SKILL.md",
+    "skills/feature/feature-task-planning/assets",
+    "skills/feature/feature-task-planning",
+    "skills/feature/feature-tech-design/assets/feature-tech-design-template.md",
+    "skills/feature/feature-tech-design/assets",
+    "skills/feature/feature-tech-design/SKILL.md",
+    "skills/feature/feature-tech-design",
+    "skills/feature/feature-requirements-clarification/assets/feature-requirements-template.md",
+    "skills/feature/feature-requirements-clarification/SKILL.md",
+    "skills/project/project-initialization/assets/initialization-log-template.md",
+    "skills/project/project-initialization/SKILL.md",
+    "skills/project/project-roadmap-planning/assets/roadmap-planning-template.md",
+    "skills/project/project-roadmap-planning/SKILL.md",
+    "skills/project/project-dev-standards/assets/dev-standards-template.md",
+    "skills/project/project-dev-standards/SKILL.md",
+    "skills/project/project-structure/assets/project-structure-template.md",
+    "skills/project/project-structure/SKILL.md",
+    "skills/project/project-tech-stack/assets/tech-stack-template.md",
+    "skills/project/project-tech-stack/SKILL.md",
+    "skills/project/project-product-overview/assets/product-overview-template.md"
   ]
 }

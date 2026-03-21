@@ -204,7 +204,7 @@ description: "功能自动化开发流水线。读取任务规划，自动将每
 
 #### 4.3 生成完成报告
 
-读取 `.claude/skills/feature-implementation/assets/stage-completion-report-template.md` 作为模板，汇总所有子 Agent 的执行结果，生成完成报告。
+读取 `.claude/skills/feature/feature-implementation/assets/stage-completion-report-template.md` 作为模板，汇总所有子 Agent 的执行结果，生成完成报告。
 
 报告保存路径：`docs/开发记录/[功能名]_自动流水线完成报告.md`
 
