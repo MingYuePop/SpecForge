@@ -8,20 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "9863954f544ede66",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "V3/Skills工作流介绍(发布版).md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Skills工作流介绍(发布版)"
-            }
-          },
-          {
             "id": "6bac113f0c89fd61",
             "type": "leaf",
             "state": {
@@ -35,8 +21,7 @@
               "title": "SKILL"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -200,6 +185,34 @@
   },
   "active": "6bac113f0c89fd61",
   "lastOpenFiles": [
+    "V3/Skills工作流V3版本介绍.md",
+    "V3/Skills工作流介绍(Github介绍).md",
+    "V1/skills/project-tech-stack/SKILL.md",
+    "V1/skills/project-structure/SKILL.md",
+    "V1/skills/project-task-planning/SKILL.md",
+    "V1/skills/ui-prototype/SKILL.md",
+    "V1/skills/project-roadmap-planning/SKILL.md",
+    "V1/skills/project-requirements-clarification/SKILL.md",
+    "V1/skills/project-product-overview/SKILL.md",
+    "V1/skills/project-doc-updater/SKILL.md",
+    "V1/skills/project-dev-standards/SKILL.md",
+    "V1/skills/project-bug-hunting/SKILL.md",
+    "V1/skills/project-context-initialization/SKILL.md",
+    "V1/skills/project-ai-mistakes/SKILL.md",
+    "V1/skills/project-agent-docs/SKILL.md",
+    "V1/skills/feature-task-planning/SKILL.md",
+    "V1/skills/feature-tech-design/SKILL.md",
+    "V1/skills/feature-requirements-clarification/SKILL.md",
+    "V1/skills/project-tech-stack",
+    "V1/skills/project-structure",
+    "V1/skills/project-task-planning",
+    "V1/skills/ui-prototype",
+    "V1/skills/project-roadmap-planning",
+    "V1/skills/project-requirements-clarification",
+    "V1/skills/project-product-overview",
+    "V1/skills/project-doc-updater",
+    "V1/skills/project-dev-standards",
+    "V1/skills/project-bug-hunting",
     "V4/skills/feature/feature-implementation/assets/manual-verification-template.md",
     "V4/通用Agent.md",
     "V4/功能级Skill重大更新说明.md",
@@ -207,34 +220,6 @@
     "V4/V3发布帖.md",
     "V4/TDD（测试驱动开发）详解.md",
     "V4/Skills工作流介绍(发布版).md",
-    "V4/Skills工作流V3版本介绍.md",
-    "V4/skills-writing-template.md",
-    "V4/CLAUDE.md",
-    "V4/个人理解/未命名.md",
-    "V4/个人理解",
-    "V4/specs/PROJECT-CONTEXT.md",
-    "V4/specs/GUARDRAILS.md",
-    "V4/specs",
-    "V4/skills/prompt-master/references/templates.md",
-    "V4/skills/prompt-master/references/patterns.md",
-    "V4/skills/prompt-master/WARP.md",
-    "V4/skills/prompt-master/SKILL.md",
-    "V4/skills/prompt-master/references",
-    "V4/skills/prompt-master/README.md",
-    "V4/skills/prompt-master/LICENSE",
-    "V4/skills/prompt-master",
-    "V4/skills/project/project-structure/assets/project-structure-template.md",
-    "V4/skills/project/project-tech-stack/assets/tech-stack-template.md",
-    "V4/skills/project/project-roadmap-planning/assets/roadmap-planning-template.md",
-    "V4/skills/project/project-initialization/assets/initialization-log-template.md",
-    "V4/skills/project/project-requirements-clarification/assets/requirements-clarification-template.md",
-    "V4/skills/project/project-product-overview/assets/product-overview-template.md",
-    "V4/skills/project/project-dev-standards/assets/dev-standards-template.md",
-    "V4/skills/project/project-tech-stack/SKILL.md",
-    "V4/skills/project/project-structure/assets",
-    "V4/skills/project/project-tech-stack/assets",
-    "V4/skills/project/project-roadmap-planning/assets",
-    "V4/skills/project/project-initialization/assets",
-    "V4/skills/project/project-requirements-clarification/assets"
+    "V4/Skills工作流V3版本介绍.md"
   ]
 }
