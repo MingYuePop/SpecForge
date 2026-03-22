@@ -34,11 +34,11 @@
 
 **用途**：{{业务含义}}
 
-| 字段名 | 类型 | 约束 | 说明 |
-|--------|------|------|------|
-| id | BIGINT | PK, AUTO_INCREMENT | 主键 |
-| {{field}} | {{type}} | {{constraints}} | {{说明}} |
-| created_at | TIMESTAMP | DEFAULT CURRENT_TIMESTAMP | 创建时间 |
+| 字段名        | 类型        | 约束                        | 说明     |
+| ---------- | --------- | ------------------------- | ------ |
+| id         | BIGINT    | PK, AUTO_INCREMENT        | 主键     |
+| {{field}}  | {{type}}  | {{constraints}}           | {{说明}} |
+| created_at | TIMESTAMP | DEFAULT CURRENT_TIMESTAMP | 创建时间   |
 
 **索引**：{{索引设计及理由}}
 
