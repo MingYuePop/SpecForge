@@ -27,15 +27,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "V3/skills/feature/feature-tech-design/assets/feature-tech-design-template.md",
+                "file": "V3/skills/feature/feature-implementation/SKILL.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "feature-tech-design-template"
+              "title": "SKILL"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -108,7 +109,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "V3/Skills工作流介绍(发布版).md",
+                "file": "V3/skills/feature/feature-implementation/SKILL.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +119,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Skills工作流介绍(发布版) 的反向链接列表"
+              "title": "SKILL 的反向链接列表"
             }
           },
           {
@@ -127,12 +128,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "V3/Skills工作流介绍(发布版).md",
+                "file": "V3/skills/feature/feature-implementation/SKILL.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Skills工作流介绍(发布版) 的出链列表"
+              "title": "SKILL 的出链列表"
             }
           },
           {
@@ -170,13 +171,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "V3/Skills工作流介绍(发布版).md",
+                "file": "V3/skills/feature/feature-implementation/SKILL.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Skills工作流介绍(发布版) 的大纲"
+              "title": "SKILL 的大纲"
             }
           }
         ]
@@ -197,23 +198,43 @@
       "bases:新建数据库": false
     }
   },
-  "active": "9863954f544ede66",
+  "active": "6bac113f0c89fd61",
   "lastOpenFiles": [
-    "V3/TDD（测试驱动开发）详解.md",
-    "V3/Skills工作流V3版本介绍.md",
-    "V3/V3发布帖.md",
-    "V3/Skills工作流介绍(发布版).md",
-    "V3/skills/feature/feature-tech-design/assets/feature-tech-design-template.md",
-    "V3/CLAUDE.md",
-    "V3/skills-writing-template.md",
-    "V3/通用Agent.md",
-    "V3/功能级Skill重大更新说明.md",
-    "V3/工作流介绍.md",
-    "V3/skills/feature/feature-tech-design/SKILL.md",
-    "V3/skills/feature/feature-implementation/SKILL.md",
-    "V3/skills/project/project-tech-stack/SKILL.md",
-    "README.md",
-    "V2/TDD（测试驱动开发）详解.md",
-    "V2/Skills工作流介绍(发布版).md"
+    "V4/通用Agent.md",
+    "V4/功能级Skill重大更新说明.md",
+    "V4/工作流介绍.md",
+    "V4/V3发布帖.md",
+    "V4/TDD（测试驱动开发）详解.md",
+    "V4/Skills工作流介绍(发布版).md",
+    "V4/Skills工作流V3版本介绍.md",
+    "V4/skills-writing-template.md",
+    "V4/CLAUDE.md",
+    "V4/个人理解/未命名.md",
+    "V4/个人理解",
+    "V4/specs/PROJECT-CONTEXT.md",
+    "V4/specs/GUARDRAILS.md",
+    "V4/specs",
+    "V4/skills/prompt-master/references/templates.md",
+    "V4/skills/prompt-master/references/patterns.md",
+    "V4/skills/prompt-master/WARP.md",
+    "V4/skills/prompt-master/SKILL.md",
+    "V4/skills/prompt-master/references",
+    "V4/skills/prompt-master/README.md",
+    "V4/skills/prompt-master/LICENSE",
+    "V4/skills/prompt-master",
+    "V4/skills/project/project-structure/assets/project-structure-template.md",
+    "V4/skills/project/project-tech-stack/assets/tech-stack-template.md",
+    "V4/skills/project/project-roadmap-planning/assets/roadmap-planning-template.md",
+    "V4/skills/project/project-initialization/assets/initialization-log-template.md",
+    "V4/skills/project/project-requirements-clarification/assets/requirements-clarification-template.md",
+    "V4/skills/project/project-product-overview/assets/product-overview-template.md",
+    "V4/skills/project/project-dev-standards/assets/dev-standards-template.md",
+    "V4/skills/project/project-tech-stack/SKILL.md",
+    "V4/skills/project/project-structure/assets",
+    "V4/skills/project/project-tech-stack/assets",
+    "V4/skills/project/project-structure/SKILL.md",
+    "V4/skills/project/project-roadmap-planning/assets",
+    "V4/skills/project/project-initialization/assets",
+    "V4/skills/project/project-requirements-clarification/assets"
   ]
 }

@@ -1,0 +1,324 @@
+{
+  "main": {
+    "id": "1756d91eb8bad653",
+    "type": "split",
+    "children": [
+      {
+        "id": "870f26e3da14ac80",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4a50c7827112e268",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "skills/feature/feature-requirements-clarification/SKILL.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "SKILL"
+            }
+          },
+          {
+            "id": "cc0d52c48b6d7218",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Skills工作流V3版本介绍.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Skills工作流V3版本介绍"
+            }
+          },
+          {
+            "id": "d234a57670ac1f36",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "skills/feature/feature-task-planning/assets/feature-task-planning-template.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "feature-task-planning-template"
+            }
+          },
+          {
+            "id": "b1f1d85fcf68ad14",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Skills工作流V3版本介绍.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Skills工作流V3版本介绍"
+            }
+          },
+          {
+            "id": "70436dcec9f3d123",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Skills工作流V3版本介绍.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Skills工作流V3版本介绍"
+            }
+          },
+          {
+            "id": "ff9c47fd73cc42a2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "功能级Skill重大更新说明.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "功能级Skill重大更新说明"
+            }
+          },
+          {
+            "id": "e3edf15eb66f7666",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "skills/feature/feature-tech-design/SKILL.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "SKILL"
+            }
+          },
+          {
+            "id": "553977bca0e2f443",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "skills/feature/feature-task-planning/assets/feature-task-planning-template.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "feature-task-planning-template"
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "6912d6e7509a3709",
+    "type": "split",
+    "children": [
+      {
+        "id": "43634256cef866ef",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "17db4696fc8bf12c",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "0f0be31f618cafe4",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "89d64bf6d55259d1",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "d6d34ddd238361fd",
+    "type": "split",
+    "children": [
+      {
+        "id": "f611187f75df4c9f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d079a0da05f54919",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Skills工作流介绍(发布版).md",
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Skills工作流介绍(发布版) 的反向链接列表"
+            }
+          },
+          {
+            "id": "574d9ff6809733a8",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Skills工作流介绍(发布版).md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Skills工作流介绍(发布版) 的出链列表"
+            }
+          },
+          {
+            "id": "67dd05acc7c45085",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "b9f6d1cf4f86940b",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "10bb551aa85630db",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Skills工作流V3版本介绍.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Skills工作流V3版本介绍 的大纲"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 301.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "b1f1d85fcf68ad14",
+  "lastOpenFiles": [
+    "功能级Skill重大更新说明.md",
+    "V3发布帖.md",
+    "skills-writing-template.md",
+    "Skills工作流V3版本介绍.md",
+    "Skills工作流介绍(发布版).md",
+    "skills/feature/feature-implementation/SKILL.md",
+    "TDD（测试驱动开发）详解.md",
+    "工作流介绍.md",
+    "skills/feature/feature-task-planning/assets/feature-task-planning-template.md",
+    "skills/feature/feature-tech-design/SKILL.md",
+    "skills/feature/feature-requirements-clarification/SKILL.md",
+    "skills/feature/feature-requirements-clarification/assets/feature-requirements-template.md",
+    "skills/feature/feature-tech-design/assets/feature-tech-design-template.md",
+    "通用Agent.md",
+    "skills/feature/feature-task-planning/SKILL.md",
+    "CLAUDE.md.tmp.50340.1774073784312",
+    "skills/feature-auto-pipeline/SKILL.md",
+    "skills/feature-task-planning/SKILL.md",
+    "skills/feature/feature-auto-pipeline/assets/sub-agent-prompt-template.md",
+    "skills/feature/feature-auto-pipeline/SKILL.md",
+    "skills/feature/feature-auto-pipeline/assets",
+    "skills/feature/feature-auto-pipeline",
+    "skills/feature/feature-evolution/assets/feature-evolution-template.md",
+    "skills/feature/feature-evolution/SKILL.md",
+    "skills/feature/feature-evolution/assets",
+    "skills/feature/feature-evolution",
+    "skills/feature/feature-implementation/assets/stage-completion-report-template.md",
+    "skills/feature/feature-implementation/assets",
+    "skills/feature/feature-implementation",
+    "skills/feature/feature-task-planning/assets",
+    "skills/feature/feature-task-planning",
+    "skills/feature/feature-tech-design/assets",
+    "skills/project/project-initialization/assets/initialization-log-template.md",
+    "skills/project/project-initialization/SKILL.md",
+    "skills/project/project-roadmap-planning/assets/roadmap-planning-template.md",
+    "skills/project/project-roadmap-planning/SKILL.md"
+  ]
+}
