@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "skills/feature/feature-implementation/SKILL.md",
-                "mode": "source",
+                "file": "Skills工作流V3版本介绍.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "SKILL"
+              "title": "Skills工作流V3版本介绍"
             }
           },
           {
@@ -255,13 +255,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "skills/feature/feature-implementation/SKILL.md",
+                "file": "Skills工作流V3版本介绍.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "SKILL 的大纲"
+              "title": "Skills工作流V3版本介绍 的大纲"
             }
           }
         ],
@@ -284,10 +284,13 @@
   },
   "active": "b1f1d85fcf68ad14",
   "lastOpenFiles": [
+    "功能级Skill重大更新说明.md",
+    "V3发布帖.md",
+    "skills-writing-template.md",
     "Skills工作流V3版本介绍.md",
+    "Skills工作流介绍(发布版).md",
     "skills/feature/feature-implementation/SKILL.md",
     "TDD（测试驱动开发）详解.md",
-    "功能级Skill重大更新说明.md",
     "工作流介绍.md",
     "skills/feature/feature-task-planning/assets/feature-task-planning-template.md",
     "skills/feature/feature-tech-design/SKILL.md",
@@ -295,7 +298,6 @@
     "skills/feature/feature-requirements-clarification/assets/feature-requirements-template.md",
     "skills/feature/feature-tech-design/assets/feature-tech-design-template.md",
     "通用Agent.md",
-    "Skills工作流介绍(发布版).md",
     "skills/feature/feature-task-planning/SKILL.md",
     "CLAUDE.md.tmp.50340.1774073784312",
     "skills/feature-auto-pipeline/SKILL.md",
@@ -317,8 +319,6 @@
     "skills/project/project-initialization/assets/initialization-log-template.md",
     "skills/project/project-initialization/SKILL.md",
     "skills/project/project-roadmap-planning/assets/roadmap-planning-template.md",
-    "skills/project/project-roadmap-planning/SKILL.md",
-    "skills/project/project-dev-standards/assets/dev-standards-template.md",
-    "skills/project/project-dev-standards/SKILL.md"
+    "skills/project/project-roadmap-planning/SKILL.md"
   ]
 }

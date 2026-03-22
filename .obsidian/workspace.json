@@ -1,24 +1,38 @@
 {
   "main": {
-    "id": "1756d91eb8bad653",
+    "id": "2299269375511496",
     "type": "split",
     "children": [
       {
-        "id": "870f26e3da14ac80",
+        "id": "fe697a16bbbe1dab",
         "type": "tabs",
         "children": [
           {
-            "id": "70436dcec9f3d123",
+            "id": "9863954f544ede66",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "TDD（测试驱动开发）详解.md",
+                "file": "V3/Skills工作流介绍(发布版).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "TDD（测试驱动开发）详解"
+              "title": "Skills工作流介绍(发布版)"
+            }
+          },
+          {
+            "id": "6bac113f0c89fd61",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "V3/skills/feature/feature-tech-design/assets/feature-tech-design-template.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "feature-tech-design-template"
             }
           }
         ]
@@ -27,15 +41,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "6912d6e7509a3709",
+    "id": "0832f01277dd7269",
     "type": "split",
     "children": [
       {
-        "id": "43634256cef866ef",
+        "id": "0f81550bb0aa7653",
         "type": "tabs",
         "children": [
           {
-            "id": "17db4696fc8bf12c",
+            "id": "a666c5aff4724ca7",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -48,7 +62,7 @@
             }
           },
           {
-            "id": "0f0be31f618cafe4",
+            "id": "940225e23d057ba6",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -65,7 +79,7 @@
             }
           },
           {
-            "id": "89d64bf6d55259d1",
+            "id": "31f7b475504c2bb3",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -81,21 +95,21 @@
     "width": 300
   },
   "right": {
-    "id": "d6d34ddd238361fd",
+    "id": "98a79abd0a7f650a",
     "type": "split",
     "children": [
       {
-        "id": "f611187f75df4c9f",
+        "id": "0c7d8bf001e8c714",
         "type": "tabs",
         "children": [
           {
-            "id": "d079a0da05f54919",
+            "id": "0fc077e202058963",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Skills工作流介绍(发布版).md",
-                "collapseAll": true,
+                "file": "V3/Skills工作流介绍(发布版).md",
+                "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
@@ -108,12 +122,12 @@
             }
           },
           {
-            "id": "574d9ff6809733a8",
+            "id": "e732092b77909417",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Skills工作流介绍(发布版).md",
+                "file": "V3/Skills工作流介绍(发布版).md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -122,7 +136,7 @@
             }
           },
           {
-            "id": "67dd05acc7c45085",
+            "id": "6ddfe238198c0bcf",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -137,7 +151,7 @@
             }
           },
           {
-            "id": "b9f6d1cf4f86940b",
+            "id": "9e5faa21e4e5ff34",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -151,26 +165,26 @@
             }
           },
           {
-            "id": "10bb551aa85630db",
+            "id": "fd4fe36f1ba282e3",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "TDD（测试驱动开发）详解.md",
+                "file": "V3/Skills工作流介绍(发布版).md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "TDD（测试驱动开发）详解 的大纲"
+              "title": "Skills工作流介绍(发布版) 的大纲"
             }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 301.5
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -183,43 +197,23 @@
       "bases:新建数据库": false
     }
   },
-  "active": "17db4696fc8bf12c",
+  "active": "9863954f544ede66",
   "lastOpenFiles": [
-    "skills/feature-implementation/assets/stage-completion-report-template.md",
-    "skills/feature-implementation/SKILL.md",
-    "skills/feature-implementation/assets",
-    "skills/feature-implementation",
-    "skills/feature-evolution/assets/feature-evolution-template.md",
-    "skills/feature-evolution/SKILL.md",
-    "skills/feature-evolution/assets",
-    "skills/feature-evolution",
-    "skills/feature-requirements-clarification/assets/feature-requirements-template.md",
-    "skills/feature-requirements-clarification/SKILL.md",
-    "skills/feature-requirements-clarification/assets",
-    "skills/feature-requirements-clarification",
-    "skills/feature-task-planning/assets/feature-task-planning-template.md",
-    "skills/feature-task-planning/SKILL.md",
-    "skills/feature-task-planning/assets",
-    "skills/feature-task-planning",
-    "skills/project-initialization/assets/initialization-log-template.md",
-    "skills/project-initialization/SKILL.md",
-    "skills/project-initialization/assets",
-    "skills/project-initialization",
-    "skills/project-dev-standards/assets/dev-standards-template.md",
-    "skills/project-dev-standards/SKILL.md",
-    "skills/feature-tech-design/assets/feature-tech-design-template.md",
-    "skills/feature-tech-design/SKILL.md",
-    "skills/feature/feature-implementation/SKILL.md",
-    "skills/project-tech-stack/assets/tech-stack-template.md",
-    "skills/project-tech-stack/SKILL.md",
-    "skills/project-structure/assets/project-structure-template.md",
-    "skills/project-structure/SKILL.md",
-    "skills/project-roadmap-planning/assets/roadmap-planning-template.md",
-    "skills/project-roadmap-planning/SKILL.md",
-    "skills/project-requirements-clarification/assets/requirements-clarification-template.md",
-    "skills/project-requirements-clarification/SKILL.md",
-    "skills/project-product-overview/assets/product-overview-template.md",
-    "skills/project-product-overview/SKILL.md",
-    "skills/feature-auto-pipeline/assets/sub-agent-prompt-template.md"
+    "V3/TDD（测试驱动开发）详解.md",
+    "V3/Skills工作流V3版本介绍.md",
+    "V3/V3发布帖.md",
+    "V3/Skills工作流介绍(发布版).md",
+    "V3/skills/feature/feature-tech-design/assets/feature-tech-design-template.md",
+    "V3/CLAUDE.md",
+    "V3/skills-writing-template.md",
+    "V3/通用Agent.md",
+    "V3/功能级Skill重大更新说明.md",
+    "V3/工作流介绍.md",
+    "V3/skills/feature/feature-tech-design/SKILL.md",
+    "V3/skills/feature/feature-implementation/SKILL.md",
+    "V3/skills/project/project-tech-stack/SKILL.md",
+    "README.md",
+    "V2/TDD（测试驱动开发）详解.md",
+    "V2/Skills工作流介绍(发布版).md"
   ]
 }
