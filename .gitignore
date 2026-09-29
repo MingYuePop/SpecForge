@@ -27,3 +27,6 @@ V3/skills/feature/feature-auto-pipeline/
 
 # V4
 V4/
+
+# macOS
+.DS_Store

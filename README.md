@@ -1,740 +1,740 @@
-我自己正在使用一套自研的工作流 **SpecForge**
+I am currently using a self-developed workflow called **SpecForge**
 
-我使用过市面上大多数 AI 工作流，但体验往往达不到想要的效果。最初的思路来自 Kiro Spec 模式，但用下来发现它不够完美，于是我自己重新设计了一套，经过多个项目的实战测试和反复优化，发现特别好用，尤其适合我这种几乎没有编程基础的人。
+I have used most of the AI workflows on the market, but the experience often fell short of what I wanted. The initial idea came from Kiro Spec mode, but after using it, I found it was not perfect enough, so I redesigned a set myself. After real-world testing across multiple projects and repeated optimization, I found it to be exceptionally useful, especially for someone like me with almost no programming background.
 
-本篇帖子不会逐个讲解 Skill 的内部实现，而是带你了解这套工作流的**方法论和完整流程**——为什么要这样做、每一步在解决什么问题、以及我在实际使用中积累的技巧。文章会比较长，但看完之后，你对 AI 编程的认知会完全不一样。
+This post will not walk through the internal implementation of each Skill one by one. Instead, it will take you through the **methodology and complete workflow** of this system — why it is designed this way, what problem each step solves, and the tips I have accumulated from actual use. The article will be fairly long, but after reading it, your understanding of AI programming will be completely different.
 
-工作流和技巧会随着开发实践不断迭代，我也会持续分享给大家。如果你觉得有优化的地方，欢迎在 [GitHub](https://github.com/MingYuePop/SpecForge) 上提交 PR——仅靠我一个人的视角远远不够，我需要大家的反馈和建议，才能把它打磨得更好。
-
----
-
-## 个人介绍
-
-我是一个几乎没有编程基础的人，只有初中学历。之前学过 Python 基础，但没深入下去——因为那时候正是 AI 编程爆火的时代，我辛辛苦苦写的程序，AI 只需要几分钟就能搞定。当时还没有什么 AI 编程工具，只能在网页上用，手动复制粘贴，后来才出来了 Cursor、Trae、Claude Code 这些。
-
-我用 AI 写过多个程序和应用，今年还赚到了人生中第一个 1 万块，不算多，但我才 16 岁，真的很开心。目标是攒钱买 iPhone 18 Pro，因为我现在的手机真的太卡了 😭 要用就用好的，这是我的原则。
-
-为什么要在自我介绍里说这些？我想证明一件事：**每个人现在都有机会，你只需要去做。** 但为什么很多人用 AI 开发到最后都做不出来？这就是本篇帖子要解决的问题。
+The workflow and tips will continue to iterate with development practice, and I will keep sharing them with everyone. If you find areas for improvement, feel free to submit a PR on [GitHub](https://github.com/MingYuePop/SpecForge) — my perspective alone is far from enough. I need everyone's feedback and suggestions to polish it better.
 
 ---
 
-## 开发顺序：大多数人是怎么失败的
+## About Me
 
-假设你有一个想法：**我想开发一个个人博客。**
+I am someone with almost no programming background, with only a middle school education. I previously learned Python basics but did not go deep — because that was exactly the era when AI programming was exploding. The programs I worked so hard to write, AI could knock out in a few minutes. At that time, there were no real AI programming tools yet; you could only use them on web pages, manually copying and pasting. Later, Cursor, Trae, Claude Code, and others came along.
 
-你会怎么跟 AI 说？大多数人要么直接丢一句"我想做个博客"，要么会补充一些功能点，比如"要有发布文章功能、用户注册功能"。
+I have used AI to write multiple programs and applications, and this year I earned my first 10,000 yuan. It is not a lot, but I am only 16 years old, and I am really happy. My goal is to save up for an iPhone 18 Pro, because my current phone is really too laggy. If I am going to use something, I use the best — that is my principle.
 
-这其实只是开发的前两个阶段：**做什么**和**有哪些功能**。但后面还有更多阶段——注册用什么方式？邮箱还是手机号？手机号要对接什么接口？数据库怎么设计？
-
-对于没有技术背景的人来说，越往后越不知道该怎么回答。而 AI 呢？它完全不了解你，你说"开发博客"，它知道要做博客，但不知道博客里具体要什么功能，它只能靠猜。猜出来的东西跟你的想法不一样，开发到后面越偏越远，最后整个项目就乱了。
-
-**根本原因就是：没有一个系统的规划流程。**
+Why mention all this in the self-introduction? I want to prove one thing: **everyone now has the opportunity; you just need to do it.** But why do many people fail to produce results when developing with AI? That is the problem this post aims to solve.
 
 ---
 
-## 工作流全景：先看地图再上路
+## Development Sequence: How Most People Fail
 
-在逐个介绍 Skill 之前，先给你一张全景图，让你知道整套工作流长什么样。
+Suppose you have an idea: **I want to develop a personal blog.**
 
-这套工作流一共 **13 个 Skill**，分成三层：
+How would you tell the AI? Most people either just throw out "I want to make a blog," or they add some feature points like "it needs an article publishing feature and a user registration feature."
 
-**第一层：项目级（启动时用一次）**
+This is really just the first two stages of development: **what to build** and **what features it has**. But there are many more stages after that — what registration method to use? Email or phone number? What API to integrate for phone numbers? How to design the database?
 
-从一个模糊的想法到一个可以开始写代码的项目骨架，走完这 7 步：
+For people without a technical background, the further along you go, the less you know how to answer. And the AI? It does not know you at all. You say "develop a blog," and it knows to build a blog, but it does not know what specific features the blog should have. It can only guess. What it guesses will differ from what you have in mind, and the further along you get in development, the more it drifts, until the entire project becomes a mess.
+
+**The root cause is: there is no systematic planning process.**
+
+---
+
+## Workflow Overview: Look at the Map Before Hitting the Road
+
+Before introducing each Skill one by one, let me give you a panoramic view so you know what the entire workflow looks like.
+
+This workflow consists of **13 Skills**, divided into three layers:
+
+**Layer 1: Project-Level (used once at startup)**
+
+From a vague idea to a project skeleton ready for coding, go through these 7 steps:
 
 ```
-需求澄清 → 产品概述 → 技术栈选型 → 目录结构 → 开发规范 → 路线图规划 → 项目初始化
+Requirements Clarification → Product Overview → Tech Stack Selection → Directory Structure → Development Standards → Roadmap Planning → Project Initialization
 ```
 
-每一步的输出都是下一步的输入，像流水线一样环环相扣。走完之后，`specs/` 目录下会有一整套项目文档，项目目录也搭好了。
+The output of each step is the input of the next, linked together like an assembly line. After completing them, the `specs/` directory will contain a complete set of project documentation, and the project directory structure will be set up.
 
-**第二层：功能级（反复使用）**
+**Layer 2: Feature-Level (used repeatedly)**
 
-项目骨架搭好之后，就按照路线图一个功能一个功能地做。每个功能走这 4 步：
-
-```
-功能需求澄清 → 技术方案设计 → 任务规划 → 编码实现
-```
-
-路线图里有 10 个功能？那就跑 10 遍。如果已完成的功能需要改动，还有一个专门的迭代 Skill：
+After the project skeleton is set up, you develop feature by feature according to the roadmap. Each feature goes through these 4 steps:
 
 ```
-功能迭代变更 → 编码实现
+Feature Requirements Clarification → Technical Design → Task Planning → Coding Implementation
 ```
 
-**第三层：通用（随时使用）**
+The roadmap has 10 features? Then you run this 10 times. If a completed feature needs changes, there is a dedicated evolution Skill:
 
-遇到 BUG 了？直接调 BUG 修复 Skill，不管你在哪个阶段都能用。
+```
+Feature Evolution → Coding Implementation
+```
 
-**一句话总结**：项目级走一遍打地基，功能级循环跑盖楼，通用级随叫随到修补丁。
+**Layer 3: Universal (use anytime)**
 
-### 让这套流程真正跑起来的两个核心机制
+Encountered a bug? Directly invoke the bug fix Skill — it works regardless of which stage you are in.
 
-光有 13 个 Skill 还不够。如果 AI 不守规矩——该做需求分析的时候偷偷写代码，换个新窗口就把你的项目忘得一干二净——那再好的流程也白搭。
+**One-sentence summary**: Project-level runs once to lay the foundation, feature-level loops to build the floors, universal-level is on call to patch things up.
 
-所以这套工作流有两个"看不见但一直在起作用"的核心机制，每个 Skill 执行时都会自动加载它们：
+### Two Core Mechanisms That Make This Process Actually Work
 
-**机制一：边界守卫（GUARDRAILS）**
+Having 13 Skills is not enough. If the AI does not follow the rules — secretly writing code when it should be doing requirements analysis, or completely forgetting your project when switching to a new window — then no matter how good the process is, it is all for nothing.
 
-AI 有个本能：你问它什么，它都想帮你做。听起来是好事，但在工作流里这反而是最大的隐患。
+So this workflow has two core mechanisms that are "invisible but always at work." Every Skill automatically loads them when executing:
 
-比如你在用需求澄清 Skill 的时候随口说了句"这个功能大概怎么实现？"，AI 的本能反应是直接给你写代码。但这时候需求还没想清楚呢，代码写了也是白写，甚至会把你带偏——你会觉得"既然代码都写了，需求就这样吧"，结果后面全是坑。
+**Mechanism 1: Guardrails (GUARDRAILS)**
 
-边界守卫就是来管这个事的。它给每个 Skill 划了一条硬线：**你在这个阶段只能做这个阶段的事。** 需求阶段只能聊需求，设计阶段只能出方案，编码阶段才能写代码。AI 想越界？直接拦住，然后告诉你"现在不是做这个的时候，我们先把当前阶段想清楚"。
+AI has an instinct: whatever you ask, it wants to do for you. This sounds like a good thing, but in a workflow, it is actually the biggest hidden danger.
 
-这不是 AI 不帮你，恰恰相反——**在错误的阶段做错误的事才是帮倒忙。** 边界守卫强制 AI 在正确的时间做正确的事。
+For example, while using the requirements clarification Skill, you casually mention "how would this feature be implemented?" The AI's instinctive reaction is to write code for you directly. But at this point, the requirements have not been thought through yet, so any code written is wasted, and it might even lead you astray — you might think "well, the code is already written, let's just go with these requirements," and end up with pitfalls everywhere down the line.
 
-**机制二：项目上下文协议（PROJECT-CONTEXT）**
+The guardrails exist to manage exactly this. It draws a hard line for each Skill: **you can only do what this stage requires in this stage.** The requirements stage only discusses requirements, the design stage only produces designs, and the coding stage is the only time code gets written. The AI tries to cross the line? It gets blocked directly, and then tells you "this is not the time for that; let's first think through the current stage."
 
-AI 最大的问题是什么？**没有记忆。** 你在一个窗口里跟它聊了两小时，切到新窗口，它对你的项目一无所知。
+This is not the AI refusing to help you — quite the opposite. **Doing the wrong thing at the wrong stage is doing a disservice.** The guardrails force the AI to do the right thing at the right time.
 
-没有这个协议会怎样？AI 在一个用 Next.js + TypeScript 的项目里给你写 Vue + JavaScript 代码；项目里明明有现成的工具函数，它又重新写了一个；开发规范里说用 Tailwind，它给你写了一堆内联样式。
+**Mechanism 2: Project Context Protocol (PROJECT-CONTEXT)**
 
-项目上下文协议的规则很简单：**每个 Skill 执行前，AI 必须先读取 `specs/` 目录下的所有文档，建立对项目的完整认知。** 不读完不许开始干活。
+What is the AI's biggest problem? **No memory.** You chat with it for two hours in one window, switch to a new window, and it knows nothing about your project.
 
-这就是为什么前面说"开新窗口不怕丢上下文"——因为不管开多少个新窗口，AI 每次都会被强制重新读取项目文档。你的技术栈、开发规范、已有的功能设计，它全都知道。文档在，记忆就在。
+What happens without this protocol? The AI writes Vue + JavaScript code in a project using Next.js + TypeScript; the project already has an existing utility function, and the AI writes another one from scratch; the development standards say to use Tailwind, and the AI writes a bunch of inline styles.
 
-下面开始逐个介绍每个 Skill。
+The project context protocol's rule is simple: **before executing any Skill, the AI must first read all documents in the `specs/` directory to build a complete understanding of the project.** It cannot start working until it has finished reading.
+
+This is why I said earlier "opening a new window does not lose context" — because no matter how many new windows you open, the AI is forced to re-read the project documentation every time. Your tech stack, development standards, and existing feature designs — it knows them all. As long as the documents exist, the memory exists.
+
+Now let me introduce each Skill one by one.
 
 ---
 
-## Skill 1：project-requirements-clarification（需求澄清）
+## Skill 1: project-requirements-clarification (Requirements Clarification)
 
-这个 Skill 就是来解决"没有系统规划流程"这个问题的。
+This Skill exists to solve the "no systematic planning process" problem.
 
-当你有一个模糊的想法时，它会通过**苏格拉底式的引导提问**，从多个维度帮你把想法挖透——核心价值是什么、目标用户是谁、关键特征有哪些，最终生成一份标准化的项目描述。
+When you have a vague idea, it uses **Socratic-style guided questioning** to help you dig into the idea from multiple dimensions — what is the core value, who are the target users, what are the key features — ultimately generating a standardized project description.
 
-为什么是"引导式"而不是让你自己填表？因为对于不知道细节的人来说，你让他自己说，他说不出来。他需要有人引导，一步一步往下问，答案自然就出来了。
+Why "guided" rather than having you fill out a form yourself? Because for people who do not know the details, if you ask them to tell you themselves, they cannot. They need someone to guide them, asking step by step, and the answers naturally emerge.
 
-这个 Skill 最厉害的地方在于：它像一个**好奇的合伙人**在跟你聊天，而不是一个冷冰冰的填表机器。就像你跟合伙人说"我想做个博客"，合伙人肯定会追问你很多问题——AI 在这里扮演的就是这个角色。
+The most powerful thing about this Skill is that it acts like a **curious partner** chatting with you, rather than a cold form-filling machine. Just like when you tell a partner "I want to make a blog," the partner will definitely follow up with many questions — that is the role the AI plays here.
 
-而且你可以反复调用这个 Skill。比如第一次生成结果后，你觉得还不够完善，直接告诉 AI"我还想加更多功能"，它会用同样的引导方式继续帮你深挖。
+And you can call this Skill repeatedly. For example, after the first result is generated, if you feel it is not refined enough, just tell the AI "I want to add more features," and it will use the same guided approach to help you dig deeper.
 
-我在开发新项目时百分之百会用这个 Skill，对新手来说强烈建议从这里开始。
+I use this Skill 100% of the time when starting a new project. For beginners, I strongly recommend starting here.
 
-**示例**
+**Example**
 
-你发送的信息：
-`/project-requirements-clarification 我想开发一个个人博客`
+Your message:
+`/project-requirements-clarification I want to develop a personal blog`
 
-AI 回复的信息：
+AI's response:
 
-> 这个想法很有趣！我来帮你把它想清楚。先聊几个关键问题：
+> That is an interesting idea! Let me help you think it through. Let me ask a few key questions first:
 >
-> **为什么想做博客？**
-> - A：记录自己的技术学习过程，给自己看
-> - B：写文章吸引读者，打造个人品牌
-> - C：纯粹练手，学习全栈开发
-> - 或者其他原因？
+> **Why do you want to build a blog?**
+> - A: To document your own tech learning journey, for yourself
+> - B: To write articles and attract readers, building a personal brand
+> - C: Purely for practice, learning full-stack development
+> - Or some other reason?
 >
-> 先告诉我这个，后面我再问你目标用户和核心功能。一步一步来，不着急。
+> Tell me this first, and then I will ask you about target users and core features. One step at a time, no rush.
 
 ---
 
-## Skill 2：project-product-overview（产品概述）
+## Skill 2: project-product-overview (Product Overview)
 
-需求澄清完成后，你手上有了一份项目描述。但这份描述更像是"聊天记录的总结"——信息有了，但还不够结构化，拿去做技术选型或架构设计还差点意思。
+After requirements clarification is done, you have a project description in hand. But this description is more like a "summary of the chat" — the information is there, but it is not structured enough. It is still a bit short of being used for tech stack selection or architecture design.
 
-没有这个 Skill 会怎样？你可能直接拿着模糊的需求就开始让 AI 写代码了。写到一半发现：这个功能到底归哪个模块？验收标准是什么？目标用户到底是谁？然后你开始回头补，补着补着发现前面的代码跟新的规划对不上，又得改。
+What happens without this Skill? You might take the vague requirements and start having the AI write code directly. Halfway through, you discover: which module does this feature belong to? What are the acceptance criteria? Who are the target users exactly? Then you start going back to fill in the gaps, and as you fill them in, you find the earlier code does not match the new plan, and you have to change it again.
 
-这个 Skill 做的事情，就是把需求澄清的结果**升级为一份正式的产品文档**。它会帮你明确：项目愿景是什么、核心价值在哪、目标用户是谁、系统分成哪几个核心板块、验收标准怎么定。
+What this Skill does is **upgrade the requirements clarification results into a formal product document**. It helps you clarify: what is the project vision, where is the core value, who are the target users, what are the core modules, and how to define acceptance criteria.
 
-AI 在这里扮演的是**首席产品官**的角色。信息不够的地方，它会用引导式提问帮你补上——问法很具体，给你举例子让你选，不会问那种让人懵的开放式大问题。
+The AI plays the role of **Chief Product Officer** here. Where information is missing, it uses guided questioning to help you fill it in — the questions are very specific, giving you examples to choose from, rather than asking confusing open-ended big questions.
 
-最终输出一份 `specs/产品概述.md`，这份文档就是后面所有 Skill 的"地基"。
+The final output is a `specs/product-overview.md`, which serves as the "foundation" for all subsequent Skills.
 
-**示例**
+**Example**
 
-你发送的信息：
-`/project-product-overview 请基于需求澄清的结果生成产品概述`
+Your message:
+`/project-product-overview Please generate a product overview based on the requirements clarification results`
 
-AI 回复的信息：
+AI's response:
 
-> 我已经读取了你的项目描述，大部分信息很清晰，但有几个关键点需要补充：
+> I have read your project description. Most of the information is clear, but there are a few key points that need to be supplemented:
 >
-> **1. 核心价值还不够明确**
-> 你的博客和市面上其他博客的最大区别是什么？
-> - A：主打 Markdown 写作体验，像 Typora 一样流畅
-> - B：主打 SEO 和流量获取，帮你把文章推出去
-> - C：主打极简部署，一键上线零运维
-> - 或者你有其他想法？
+> **1. The core value is not clear enough**
+> What is the biggest difference between your blog and other blogs on the market?
+> - A: Focus on the Markdown writing experience, as smooth as Typora
+> - B: Focus on SEO and traffic acquisition, helping you get your articles out there
+> - C: Focus on minimalist deployment, one-click launch with zero ops
+> - Or do you have other ideas?
 >
-> **2. 验收标准需要量化**
-> 第一版上线的标准是什么？我建议至少定两条：
-> - 功能层面：比如"能发布文章、能按标签分类、有基础的阅读统计"
-> - 性能层面：比如"首页加载 < 2 秒"
+> **2. Acceptance criteria need to be quantified**
+> What is the standard for the first version launch? I suggest defining at least two:
+> - Feature level: e.g., "can publish articles, can categorize by tags, has basic reading statistics"
+> - Performance level: e.g., "homepage loads in < 2 seconds"
 >
-> 请告诉我你的选择，我来生成完整的产品概述文档。
+> Please tell me your choices, and I will generate the complete product overview document.
 
 ---
 
-## Skill 3：project-tech-stack（技术栈选型）
+## Skill 3: project-tech-stack (Tech Stack Selection)
 
-产品概述定了，下一个问题就是：**用什么技术来做？**
+With the product overview set, the next question is: **what technology should be used to build it?**
 
-这一步很多人要么自己去搜"最火的前端框架"，要么直接跟 AI 说"你帮我选"。两种做法都有问题——追热门容易踩坑（新框架生态不全、文档不够、AI 训练数据少），全交给 AI 的话，它也不知道你的具体约束，容易推荐一个"技术上完美但你根本用不起来"的方案。
+Many people either go search for "the hottest frontend framework" or just tell the AI "you pick for me." Both approaches have problems — chasing what is trendy easily leads to pitfalls (new frameworks have incomplete ecosystems, insufficient documentation, and less AI training data). If you leave it entirely to the AI, it does not know your specific constraints either, and might recommend a solution that is "technically perfect but practically unusable for you."
 
-这个 Skill 的 AI 角色是 **CTO**，它做选型的逻辑是**"最合适"而不是"最热门"**。它会先读你的产品概述，分析项目规模、用户量级、实时性要求这些关键约束，然后主动给你推荐完整的技术组合——不是让你一个一个选，而是直接给你打包好的方案。
+This Skill's AI role is **CTO**, and its selection logic is **"most suitable" rather than "most popular."** It first reads your product overview, analyzes key constraints like project scale, user volume, and real-time requirements, and then proactively recommends a complete technology combination — not having you pick one by one, but giving you a pre-packaged solution.
 
-对于不懂技术的人来说，这里最贴心的设计是：当需要你做选择时，一定会**给选项、给解释、给推荐**。不会冷冰冰地问你"用什么数据库"，而是告诉你每个选项适合什么场景，然后说"我建议选这个，因为..."。
+For people who do not understand technology, the most considerate design here is: when you need to make a choice, it will always **give options, give explanations, and give recommendations.** It will not coldly ask you "what database to use"; instead, it tells you what scenario each option is suited for and then says "I recommend this one, because...".
 
-最终输出 `specs/技术栈.md`。
+The final output is `specs/tech-stack.md`.
 
-**示例**
+**Example**
 
-你发送的信息：
-`/project-tech-stack 请进行技术选型`
+Your message:
+`/project-tech-stack Please perform tech stack selection`
 
-AI 回复的信息：
+AI's response:
 
-> 我已经读取了你的《产品概述》，这是一个个人博客项目，核心需求是 Markdown 写作 + SEO 友好 + 低运维成本。基于分析，我推荐以下方案：
+> I have read your "Product Overview." This is a personal blog project with core requirements of Markdown writing + SEO-friendly + low ops cost. Based on the analysis, I recommend the following solution:
 >
-> **推荐方案：Next.js + Supabase + Vercel**
-> - **前端/后端**：Next.js 14（App Router）—— SSR 天然对 SEO 友好，前后端一把梭，不需要单独维护后端
-> - **数据库**：Supabase（PostgreSQL）—— 免费额度足够个人博客用，自带用户认证
-> - **部署**：Vercel —— Next.js 的亲儿子，推上去就能跑，零运维
-> - **样式**：Tailwind CSS —— 开发快，AI 写起来也最顺手
+> **Recommended Solution: Next.js + Supabase + Vercel**
+> - **Frontend/Backend**: Next.js 14 (App Router) — SSR is naturally SEO-friendly, handles both frontend and backend in one, no need to maintain a separate backend
+> - **Database**: Supabase (PostgreSQL) — the free tier is sufficient for a personal blog, with built-in user authentication
+> - **Deployment**: Vercel — Next.js's native platform, push and it runs, zero ops
+> - **Styling**: Tailwind CSS — fast development, and the AI is most comfortable writing it
 >
-> 有一个细节需要确认：**你需要评论功能吗？**
-> - A：不需要，保持极简
-> - B：需要，用第三方服务（如 Giscus，基于 GitHub Discussions，零成本）
-> - C：需要，自建评论系统（工作量会增加不少）
-> - *我的建议*：如果要做的话选 B，成本为零且不影响核心开发节奏。
+> One detail to confirm: **Do you need a comment feature?**
+> - A: No, keep it minimal
+> - B: Yes, use a third-party service (e.g., Giscus, based on GitHub Discussions, zero cost)
+> - C: Yes, build a custom comment system (will add significant work)
+> - *My suggestion*: If you want one, choose B — zero cost and it does not affect the core development pace.
 
 ---
 
-## Skill 4：project-structure（目录结构）
+## Skill 4: project-structure (Directory Structure)
 
-技术栈选好了，但你总不能直接开始写代码吧？代码放哪？文件怎么组织？模块之间怎么划分？
+The tech stack is chosen, but you cannot just start writing code, right? Where does the code go? How are files organized? How are modules divided?
 
-没有规划目录结构会怎样？一开始可能没感觉，文件少的时候随便放都行。但项目一大，你就会发现：组件和页面混在一起、工具函数散落在各个角落、一个功能的代码分散在五六个不相关的文件夹里。到后面不管是你还是 AI，想改一个功能都得满项目找文件。
+What happens without planning the directory structure? At first, you might not feel it — when there are few files, you can put them anywhere. But once the project grows, you will find: components mixed with pages, utility functions scattered in every corner, code for one feature spread across five or six unrelated folders. Later on, whether it is you or the AI, modifying a feature means searching all over the project for files.
 
-这个 Skill 的 AI 角色是**系统架构师**。它会同时读取产品概述和技术栈文档，把"核心板块"映射成代码模块，再根据技术栈的最佳实践来设计目录。核心原则就一个：**高内聚低耦合**——相关的代码放在一起，不相关的严格隔离。
+This Skill's AI role is **System Architect**. It reads both the product overview and the tech stack document simultaneously, maps "core modules" to code modules, and then designs the directory according to the tech stack's best practices. The core principle is just one: **high cohesion, low coupling** — related code goes together, unrelated code is strictly isolated.
 
-最终输出 `specs/项目结构.md`。
+The final output is `specs/project-structure.md`.
 
-**示例**
+**Example**
 
-你发送的信息：
-`/project-structure 请设计项目目录结构`
+Your message:
+`/project-structure Please design the project directory structure`
 
-AI 回复的信息：
+AI's response:
 
-> 基于技术栈（Next.js 14 + Supabase）和产品概述中的三个核心板块（内容管理、用户系统、阅读体验），我设计了以下目录结构：
+> Based on the tech stack (Next.js 14 + Supabase) and the three core modules from the product overview (content management, user system, reading experience), I designed the following directory structure:
 >
 > ```
 > blog-project/
 > ├── src/
-> │   ├── app/                  # Next.js App Router 页面
-> │   │   ├── (auth)/           # 登录/注册相关页面
-> │   │   ├── (blog)/           # 博客前台页面
-> │   │   └── admin/            # 后台管理页面
-> │   ├── modules/              # 业务模块（核心）
-> │   │   ├── auth/             # 用户认证
-> │   │   ├── posts/            # 文章管理
-> │   │   └── analytics/        # 阅读统计
-> │   ├── shared/               # 公共组件和工具
-> │   └── lib/                  # 第三方服务封装
-> ├── specs/                    # 项目规格文档
-> ├── docs/                     # 开发文档
-> └── public/                   # 静态资源
+> │   ├── app/                  # Next.js App Router pages
+> │   │   ├── (auth)/           # Login/registration related pages
+> │   │   ├── (blog)/           # Blog frontend pages
+> │   │   └── admin/            # Admin dashboard pages
+> │   ├── modules/              # Business modules (core)
+> │   │   ├── auth/             # User authentication
+> │   │   ├── posts/            # Article management
+> │   │   └── analytics/        # Reading statistics
+> │   ├── shared/               # Shared components and utilities
+> │   └── lib/                  # Third-party service wrappers
+> ├── specs/                    # Project specification documents
+> ├── docs/                     # Development documentation
+> └── public/                   # Static assets
 > ```
 >
-> **设计思路**：采用特性架构（Feature-based），每个 `modules/` 下的模块是独立的业务单元。后续开发时，AI 只需要聚焦到对应的模块目录即可。
+> **Design rationale**: Using a feature-based architecture, where each module under `modules/` is an independent business unit. During subsequent development, the AI only needs to focus on the corresponding module directory.
 >
-> 你觉得这个结构 OK 吗？有需要调整的地方告诉我。
+> Does this structure look OK to you? Let me know if anything needs adjusting.
 
 ---
 
-## Skill 5：project-dev-standards（开发规范）
+## Skill 5: project-dev-standards (Development Standards)
 
-目录结构有了，但代码怎么写？变量怎么命名？Git 怎么提交？
+The directory structure is in place, but how should the code be written? How should variables be named? How should Git commits be formatted?
 
-这些如果不提前定好，后果就是——你让 AI 写了十个文件，每个文件的风格都不一样。有的用驼峰命名，有的用下划线；有的组件用箭头函数，有的用 function 声明；Git 提交信息更是五花八门。改起来的痛苦远比提前规定好要大得多。
+If these are not defined upfront, the consequence is — you have the AI write ten files, and each file has a different style. Some use camelCase, some use snake_case; some components use arrow functions, some use function declarations; Git commit messages are all over the place. The pain of fixing this afterward is far greater than defining it upfront.
 
-这个 Skill 的 AI 角色是**技术委员会**，它会基于你的技术栈生成一份完整的开发规范，覆盖代码风格、命名约定、Git 工作流、错误处理，甚至包括 **AI 协作协议**——告诉 AI"你在这个项目里写代码必须遵守哪些规矩"。
+This Skill's AI role is **Technical Committee**. It generates a complete set of development standards based on your tech stack, covering code style, naming conventions, Git workflow, error handling, and even including an **AI collaboration protocol** — telling the AI "what rules you must follow when writing code in this project."
 
-这里有一个重要的设计：**每条规则都具体到可以直接执行**。不会出现"遵循最佳实践"这种废话，而是明确告诉你"组件文件用 PascalCase，工具函数用 camelCase"，并且附带正确写法和错误写法的对比。
+There is an important design here: **every rule is specific enough to be directly executable.** There is no nonsense like "follow best practices"; instead, it explicitly tells you "component files use PascalCase, utility functions use camelCase," with correct and incorrect examples side by side for comparison.
 
-最终输出 `specs/开发规范.md`。
+The final output is `specs/dev-standards.md`.
 
-**示例**
+**Example**
 
-你发送的信息：
-`/project-dev-standards 请制定开发规范`
+Your message:
+`/project-dev-standards Please establish development standards`
 
-AI 回复的信息：
+AI's response:
 
-> 已读取技术栈和项目结构文档，以下是定制的开发规范（节选）：
+> I have read the tech stack and project structure documents. Here are the customized development standards (excerpt):
 >
-> **命名约定**
+> **Naming Conventions**
 >
-> | 元素 | 风格 | 示例 |
+> | Element | Style | Example |
 > |------|------|------|
-> | 组件文件 | PascalCase | `PostCard.tsx` |
-> | 工具函数文件 | camelCase | `formatDate.ts` |
-> | 目录名 | kebab-case | `user-profile/` |
+> | Component files | PascalCase | `PostCard.tsx` |
+> | Utility function files | camelCase | `formatDate.ts` |
+> | Directory names | kebab-case | `user-profile/` |
 >
-> **TypeScript 严格规则**
+> **TypeScript Strict Rules**
 >
 > ```typescript
-> // 错误 - 禁止使用 any
+> // Wrong - using any is prohibited
 > const data: any = await fetchPost()
 >
-> // 正确 - 明确类型定义
+> // Correct - explicit type definition
 > const data: PostDetail = await fetchPost()
 > ```
 >
-> **Git 提交规范**
+> **Git Commit Conventions**
 > ```
-> feat(posts): 添加文章标签筛选功能
-> fix(auth): 修复登录状态丢失问题
+> feat(posts): add article tag filtering feature
+> fix(auth): fix login state loss issue
 > ```
 >
-> 完整规范共 15 个章节，已全部生成。请确认后我保存到 `specs/开发规范.md`。
+> The complete standards have 15 sections, all generated. Please confirm and I will save them to `specs/dev-standards.md`.
 
 ---
 
-## Skill 6：project-roadmap-planning（路线图规划）
+## Skill 6: project-roadmap-planning (Roadmap Planning)
 
-到这一步，你已经有了产品概述、技术栈、目录结构、开发规范——"怎么做"已经很清楚了。但还有一个问题：**先做什么？**
+At this point, you have the product overview, tech stack, directory structure, and development standards — "how to build" is clear. But there is still one question: **what to do first?**
 
-这个问题比你想象的重要。很多人的做法是"想到啥做啥"，或者"从第一个页面开始做"。结果呢？做到用户管理的时候发现登录系统还没搭，做到文章详情页的时候发现数据模型还没定义。到处被依赖卡住。
+This question is more important than you might think. Many people's approach is "do whatever comes to mind," or "start from the first page." The result? When they get to user management, they find the login system is not set up yet; when they get to the article detail page, they find the data model has not been defined. They get stuck on dependencies everywhere.
 
-这个 Skill 的 AI 角色是**技术产品经理**，它会做三件事：
+This Skill's AI role is **Technical Product Manager**. It does three things:
 
-1. **分析模块依赖**——哪些是地基（比如用户认证、公共组件），哪些是核心业务，哪些是锦上添花
-2. **划分里程碑**——MVP 做什么、完整版做什么、增强版做什么
-3. **生成开发顺序**——每个模块带具体的开发指令，做完一个勾一个
+1. **Analyzes module dependencies** — which are foundational (e.g., user authentication, shared components), which are core business, and which are nice-to-haves
+2. **Divides milestones** — what goes in the MVP, what goes in the full version, what goes in the enhanced version
+3. **Generates the development sequence** — each module comes with specific development instructions; check one off when done
 
-拿到路线图以后，你就不用纠结"接下来做什么"了，按顺序推进就行。
+Once you have the roadmap, you no longer need to agonize over "what to do next" — just follow the order.
 
-最终输出 `specs/开发路线图.md`。
+The final output is `specs/dev-roadmap.md`.
 
-**示例**
+**Example**
 
-你发送的信息：
-`/project-roadmap-planning 请规划开发路线图`
+Your message:
+`/project-roadmap-planning Please plan the development roadmap`
 
-AI 回复的信息：
+AI's response:
 
-> 基于产品概述和项目结构，我分析了模块间的依赖关系，规划如下：
+> Based on the product overview and project structure, I analyzed the dependency relationships between modules and planned as follows:
 >
-> **里程碑一：MVP（核心闭环）**
-> - [ ] Phase 1.1：基础设施 —— `auth` + `shared`（地基，所有业务模块都依赖它）
-> - [ ] Phase 1.2：核心业务 —— `posts`（文章的创建、编辑、发布、Markdown 渲染）
-> - [ ] Phase 1.3：前台展示 —— 文章列表页、详情页、标签筛选（做完这步 MVP 就能用了）
+> **Milestone 1: MVP (Core Loop)**
+> - [ ] Phase 1.1: Infrastructure — `auth` + `shared` (foundation, all business modules depend on it)
+> - [ ] Phase 1.2: Core Business — `posts` (article creation, editing, publishing, Markdown rendering)
+> - [ ] Phase 1.3: Frontend Display — article list page, detail page, tag filtering (MVP is usable after this step)
 >
-> **里程碑二：完整版**
-> - [ ] Phase 2.1：阅读统计（`analytics`）
-> - [ ] Phase 2.2：后台管理（`admin`）
+> **Milestone 2: Full Version**
+> - [ ] Phase 2.1: Reading Statistics (`analytics`)
+> - [ ] Phase 2.2: Admin Dashboard (`admin`)
 >
-> **里程碑三：增强版**
-> - [ ] Phase 3.1：SEO 优化（sitemap、Open Graph）
-> - [ ] Phase 3.2：性能优化（图片懒加载、ISR）
+> **Milestone 3: Enhanced Version**
+> - [ ] Phase 3.1: SEO Optimization (sitemap, Open Graph)
+> - [ ] Phase 3.2: Performance Optimization (image lazy loading, ISR)
 >
-> 建议从 Phase 1.1 开始，每完成一个 Phase 回来勾选进度。
+> I suggest starting from Phase 1.1. Come back to check off progress after completing each Phase.
 
 ---
 
-## Skill 7：project-initialization（项目初始化）
+## Skill 7: project-initialization (Project Initialization)
 
-前面六个 Skill 全部是"规划"——生成的都是文档。到了第七个，终于要**动手了**。
+The first six Skills are all "planning" — they all generate documents. At the seventh, it is finally time to **take action**.
 
-这是整套工作流里唯一一个"执行类"Skill。它的职责很简单：**严格按照前面生成的文档，创建项目骨架。** 注意是"严格按照"——它不会做任何文档里没定义的事情，不会自作主张加个框架或者改个配置。
+This is the only "execution-type" Skill in the entire workflow. Its responsibility is simple: **strictly follow the previously generated documents to create the project skeleton.** Note "strictly follow" — it will not do anything that is not defined in the documents, will not take it upon itself to add a framework or change a configuration.
 
-它会读取你的技术栈、项目结构、开发规范文档，然后：创建所有目录、生成配置文件（`.gitignore`、`.env.example`、`README.md` 等）、初始化 Git 仓库。做完后输出一份初始化记录。
+It reads your tech stack, project structure, and development standards documents, then: creates all directories, generates configuration files (`.gitignore`, `.env.example`, `README.md`, etc.), and initializes the Git repository. When done, it outputs an initialization record.
 
-如果项目目录里已经有代码了（比如你是在现有项目上用这套工作流），它会自动检测到并跳过，不会覆盖任何东西。
+If there is already code in the project directory (e.g., you are using this workflow on an existing project), it will automatically detect it and skip, without overwriting anything.
 
-最终输出：项目骨架代码 + `docs/开发记录/初始化记录.md`。
+Final output: project skeleton code + `docs/dev-logs/initialization-record.md`.
 
-**示例**
+**Example**
 
-你发送的信息：
-`/project-initialization 初始化项目`
+Your message:
+`/project-initialization Initialize the project`
 
-AI 回复的信息：
+AI's response:
 
-> 开始执行项目初始化。
+> Starting project initialization.
 >
-> **环境检查**
-> - specs/技术栈.md ......... 已就绪
-> - specs/项目结构.md ........ 已就绪
-> - specs/开发规范.md ........ 已就绪
-> - 当前目录 ................ 空目录，可以初始化
-> - Node.js v20.11.0 ........ 已安装
+> **Environment Check**
+> - specs/tech-stack.md ......... Ready
+> - specs/project-structure.md ........ Ready
+> - specs/dev-standards.md ........ Ready
+> - Current directory ................ Empty directory, ready to initialize
+> - Node.js v20.11.0 ........ Installed
 >
-> **执行中...**
-> 1. `npm init -y` .................. 完成
-> 2. 安装核心依赖 ................... 完成（next, react, typescript, tailwindcss...）
-> 3. 创建目录结构（共 14 个目录）..... 完成
-> 4. 生成配置文件 ................... 完成（.gitignore, .env.example, tsconfig.json...）
-> 5. `git init` + 首次提交 .......... 完成
+> **Executing...**
+> 1. `npm init -y` .................. Done
+> 2. Install core dependencies ................... Done (next, react, typescript, tailwindcss...)
+> 3. Create directory structure (14 directories total)..... Done
+> 4. Generate configuration files ................... Done (.gitignore, .env.example, tsconfig.json...)
+> 5. `git init` + first commit .......... Done
 >
-> **初始化完成。** 详细日志已保存到 `docs/开发记录/初始化记录.md`。
+> **Initialization complete.** Detailed log saved to `docs/dev-logs/initialization-record.md`.
 >
-> 下一步：请按照 `specs/开发路线图.md` 中的 Phase 1.1 开始开发。
+> Next step: Please start development following Phase 1.1 in `specs/dev-roadmap.md`.
 
 ---
 
-## 功能级工作流：开发具体功能（V3 重做）
+## Feature-Level Workflow: Developing Specific Features (V3 Rework)
 
-项目初始化完成后，你手里有了一整套文档和项目骨架。接下来就进入真正的开发阶段了：**一个功能一个功能地做。**
+After project initialization is complete, you have a full set of documents and a project skeleton. Now you enter the real development phase: **building features one by one.**
 
-功能级工作流的流程跟项目级很像——先澄清需求、再设计方案、再拆任务、最后写代码。但区别在于，它是**针对单个功能的闭环**，而且你会反复使用它。路线图里列了 10 个功能？那你就跑 10 遍这个流程。
+The feature-level workflow is similar to the project-level — first clarify requirements, then design the approach, then break down tasks, and finally write code. The difference is that it is a **closed loop for a single feature**, and you will use it repeatedly. The roadmap lists 10 features? Then you run this process 10 times.
 
-**V3 对功能级的五个 Skill 做了近乎完全的重做。** 核心变化有三个：一是 Skill 从操作手册变成了角色设定，不再一步步教 AI 做什么，而是告诉它你是谁、关注什么、底线在哪；二是编码阶段引入了 TDD（测试驱动开发），先写测试再写代码；三是验收标准（AC）贯穿了整条链路，从需求到编码每个阶段都必须能追溯到 AC。
-
----
-
-## Skill 8：feature-requirements-clarification（功能需求澄清）
-
-你可能会想：前面不是已经做过需求澄清了吗？为什么还要再来一遍？
-
-因为项目级的需求澄清是"全局视角"——你想做什么产品、有哪些大板块。但具体到某个功能，细节差得远。
-
-比如你说"我想给文章列表加个搜索"，听起来很简单对吧？但你想过这些问题吗：搜标题还是搜正文？筛选条件能不能组合？搜不到东西显示什么？要不要记住搜索历史？怎么算"做完了"？
-
-这些你不想清楚，AI 就只能猜，猜出来的东西跟你脑子里想的完全不一样。
-
-V3 里这个 Skill 的角色是你的**产品搭档**，它不会给你列 ABCD 让你选，而是像一个真正的搭档跟你聊天。你说搜标题就行，它可能会追问正文要不要搜、标签呢；你提到支持筛选，它会接着聊筛选条件之间是什么关系。全程不聊技术，只聊用户能做什么。
-
-这个阶段最重要的产出是**验收标准（AC）**，每条用 Given-When-Then 格式描述一个具体场景。AC 的质量决定了后面一切——技术方案怎么设计、任务怎么拆、测试怎么写。
-
-最后输出一份功能需求文档到 `specs/features/` 目录下。
-
-**示例**
-
-你发送的信息：
-`/feature-requirements-clarification 我想给文章列表加个搜索`
-
-AI 回复的信息：
-
-> 搜索功能，好的。先聊几个基本的——你说的搜索是只搜标题，还是正文也要搜？标签呢？
->
-> 另外你的文章列表现在有没有分类或者筛选？如果有的话，搜索和筛选之间是什么关系，比如我先选了某个标签，再搜索，是在这个标签下搜还是搜全部？
->
-> 你先说说大概想要什么效果，咱们一步步聊。
+**V3 did a near-complete rework of the five feature-level Skills.** There are three core changes: first, Skills went from operation manuals to role definitions — no longer teaching the AI step by step what to do, but telling it who you are, what to focus on, and where the bottom line is; second, TDD (Test-Driven Development) was introduced in the coding stage — write tests first, then write code; third, Acceptance Criteria (AC) run through the entire chain, from requirements to coding, every stage must be traceable to AC.
 
 ---
 
-## Skill 9：feature-tech-design（技术方案设计）
+## Skill 8: feature-requirements-clarification (Feature Requirements Clarification)
 
-需求文档写好了，接下来该想"怎么实现"了。
+You might be thinking: did we not already do requirements clarification? Why do it again?
 
-没有这个 Skill 的时候，很多人直接让 AI 开始写代码。结果 AI 随便选了个实现方式，写到一半发现不合适又推倒重来。或者更糟——功能写完了，发现跟已有的代码架构冲突，改起来比重写还痛苦。
+Because the project-level requirements clarification is a "global perspective" — what product you want to build and what the major modules are. But when it comes to a specific feature, the details are far more nuanced.
 
-V3 里这个 Skill 的角色是你的**技术搭档**，它会先看你项目里已有什么可以复用，然后从 AC 反推需要什么数据模型、什么接口、什么核心逻辑。沿用项目已有做法的决策它直接定，不问你；但需要引入新依赖或者有多种可行方案的，它会暂停让你确认。
+For example, you say "I want to add search to the article list." Sounds simple, right? But have you thought about these questions: search titles or search body text? Can filter conditions be combined? What to display when nothing is found? Should search history be saved? How do you define "done"?
 
-方案末尾有一张 AC 覆盖汇总表，一眼就能看到每条需求是否都有对应的技术设计。如果某条 AC 在技术上没法实现，它必须明说，不能假装覆盖了。
+If you do not think these through, the AI can only guess, and what it guesses will be completely different from what you have in your head.
 
-**示例**
+In V3, this Skill's role is your **product partner**. It will not give you a list of A/B/C/D to choose from; instead, it chats with you like a real partner. You say "just search titles," and it might follow up with whether the body should be searched too, what about tags; you mention "support filtering," and it will continue the conversation about what the relationship is between filter conditions. The entire process does not touch technology — it only discusses what the user can do.
 
-你发送的信息：
-`/feature-tech-design 搜索功能`
+The most important output of this stage is **Acceptance Criteria (AC)**, each describing a specific scenario in Given-When-Then format. The quality of the AC determines everything that follows — how the technical design is done, how tasks are broken down, how tests are written.
 
-AI 回复的信息：
+Finally, it outputs a feature requirements document to the `specs/features/` directory.
 
-> 读完需求文档了。搜索这块有个决策需要你来定——现在你的文章数据量不大，用数据库的 LIKE 查询就够了，简单直接。但如果后面文章量上来了，可能需要换 Elasticsearch 之类的方案。
+**Example**
+
+Your message:
+`/feature-requirements-clarification I want to add search to the article list`
+
+AI's response:
+
+> Search feature, got it. Let me ask a few basics first — when you say search, do you mean searching only titles, or the body too? What about tags?
 >
-> 我建议先用 LIKE，后面真到了性能瓶颈再迁移，成本最低。你觉得呢？
+> Also, does your article list currently have categories or filters? If so, what is the relationship between search and filtering? For example, if I first select a tag and then search, does it search within that tag or search everything?
 >
-> 另外搜索框要不要做防抖？就是用户打字的时候不要每敲一个字就请求一次，等停下来再搜。这个我建议加上，体验会好很多，实现也不复杂。
+> Tell me roughly what effect you want, and we will take it step by step.
 
 ---
 
-## Skill 10：feature-task-planning（任务规划）
+## Skill 9: feature-tech-design (Technical Design)
 
-技术方案有了，但你总不能直接丢给 AI 说"按技术方案写代码吧"。一个功能可能涉及十几个文件、五六个模块，让 AI 一口气全写了，它大概率会搞混、漏掉东西，因为上下文太长导致质量下降。
+The requirements document is written; now it is time to think about "how to implement it."
 
-V3 里这个 Skill 的角色是**技术主管**，把技术方案拆成一个个原子任务——每个 30 分钟到 2 小时，单一职责，可独立验证。同时理清依赖关系，用 Mermaid 图展示。
+Without this Skill, many people just let the AI start writing code directly. The result is the AI picks an implementation approach at random, gets halfway through, finds it is not suitable, and starts over. Or worse — the feature is done, but it conflicts with the existing code architecture, and fixing it is more painful than rewriting.
 
-V3 有两个重要变化。第一，**测试不再是独立的任务**。V2 里会有单独的"编写单元测试"任务，V3 取消了，因为每个任务都通过 TDD 执行，测试内嵌在执行过程中。第二，**验证标准的质量成了核心产出**。验证标准直接就是 TDD 红灯阶段的输入——写得好，开发时就知道第一个测试该怎么写。比如"搜索接口返回正确数据"就是差的验证标准，"GET /api/articles?q=Next.js 返回 200，每篇文章的 title 都包含 Next.js"才是好的。
+In V3, this Skill's role is your **technical partner**. It first looks at what can be reused in your project, then works backward from the AC to determine what data models, interfaces, and core logic are needed. Decisions that follow existing project practices are made directly without asking you; but when new dependencies need to be introduced or there are multiple viable approaches, it pauses for your confirmation.
 
-每个任务还有一行通俗解释，用零技术术语描述用户可见的变化，比如"完成后，用户在列表顶部能看到一个搜索框"。
+At the end of the design, there is an AC coverage summary table where you can see at a glance whether each requirement has a corresponding technical design. If a certain AC cannot be technically implemented, it must say so explicitly — it cannot pretend it is covered.
 
-**示例**
+**Example**
 
-你发送的信息：
-`/feature-task-planning 搜索功能`
+Your message:
+`/feature-tech-design Search feature`
 
-AI 回复的信息：
+AI's response:
 
-> 读完技术方案了，拆成了 5 个任务，分 2 个阶段。
+> I have finished reading the requirements document. There is a decision for you to make on the search — your current article volume is not large, so using the database's LIKE query is sufficient, simple and straightforward. But if the article volume grows later, you might need to switch to something like Elasticsearch.
 >
-> 第 1 阶段：后端
-> - Task-01：搜索接口实现 [45min]
->   通俗解释：完成后，后台具备了按关键词查找文章的能力
->   验证标准：GET /api/articles?q=Next.js，返回的每篇文章 title 都包含 Next.js
-> - Task-02：筛选与分页 [40min] ← 依赖 Task-01
->   通俗解释：完成后，搜索结果支持按标签筛选，一页显示 10 条
->   验证标准：GET /api/articles?q=Next.js&tag=前端&page=2，返回结果同时满足关键词和标签条件
+> I suggest using LIKE for now and migrating when you actually hit a performance bottleneck — lowest cost. What do you think?
 >
-> 第 2 阶段：前端
-> - Task-03：搜索框组件 [40min]
-> - Task-04：搜索结果列表与空状态 [35min] ← 依赖 Task-03
-> - Task-05：防抖与加载状态 [30min] ← 依赖 Task-04
->
-> 注意这里没有单独的测试任务，每个任务在执行时都会通过 TDD 先写测试再写代码。
+> Also, should the search box have debounce? That means when the user is typing, it does not send a request on every keystroke; it waits until they stop typing before searching. I recommend adding this — the experience will be much better, and the implementation is not complicated.
 
 ---
 
-## Skill 11：feature-implementation（编码实现）
+## Skill 10: feature-task-planning (Task Planning)
 
-终于到写代码的环节了。
+The technical design is done, but you cannot just throw it at the AI and say "write code according to the technical design." A feature might involve a dozen files and five or six modules. If you have the AI do it all at once, it will likely get confused and miss things, because the overly long context causes quality degradation.
 
-前面铺垫了这么多——需求、技术方案、任务规划——到这一步其实是最轻松的。因为 AI 要做什么已经写得清清楚楚了，它不需要猜、不需要自由发挥，照着文档一个任务一个任务执行就行。
+In V3, this Skill's role is **Tech Lead**, breaking the technical design into atomic tasks — each 30 minutes to 2 hours, single responsibility, independently verifiable. It also clarifies dependencies and displays them with a Mermaid diagram.
 
-V3 最大的变化在这里：**引入了 TDD 作为唯一的编码方式。** 每个任务都走 Red-Green-Refactor 循环——先根据验证标准写一个会失败的测试，再写刚好能通过的代码，最后在测试保护下重构。铁律只有一条：没有失败的测试，就不写实现代码。
+V3 has two important changes. First, **tests are no longer standalone tasks.** In V2, there would be a separate "write unit tests" task; V3 removed this, because every task is executed through TDD, and testing is embedded in the execution process. Second, **the quality of acceptance criteria became the core output.** Acceptance criteria directly serve as input for the TDD red phase — if they are well-written, you know exactly how to write the first test during development. For example, "the search API returns correct data" is a bad acceptance criterion; "GET /api/articles?q=Next.js returns 200, every article's title contains Next.js" is a good one.
 
-V2 里每个任务开始前都会弹一句"是否继续？"，七个任务弹七次，你只能一直回"继续"。V3 去掉了这种机械确认，AI 像一个真正的开发者一样流畅地推进。
+Each task also has a one-line plain-language explanation, describing the user-visible change in zero technical terms, such as "After completion, the user can see a search box at the top of the list."
 
-TDD 循环完成后，根据任务性质选择验收方式：UI 任务用 Playwright 在浏览器中操作验证，纯后端任务靠单元测试覆盖，数据库变更通过查询验证。
+**Example**
 
-每个阶段完成后生成报告，里面有个技术债务区域，记录开发中务实的妥协。重要的是记录下来，不是假装它们不存在。
+Your message:
+`/feature-task-planning Search feature`
 
-为什么一个阶段一个阶段来，不一口气全做完？AI 的上下文窗口有限，塞太多东西质量会下降。每个阶段做完可以检查一下，发现问题及时纠正。
+AI's response:
 
-**示例**
-
-你发送的信息：
-`/feature-implementation 完成搜索功能的任务 第1阶段`
-
-AI 回复的信息：
-
-> 读完三份文档了，第 1 阶段有 2 个任务，没有依赖阻塞，直接开始。
+> I have finished reading the technical design and broken it down into 5 tasks across 2 stages.
 >
-> Task-01：搜索接口实现
+> Stage 1: Backend
+> - Task-01: Search API implementation [45min]
+>   Plain-language: After completion, the backend has the ability to find articles by keyword
+>   Acceptance criteria: GET /api/articles?q=Next.js, every returned article's title contains Next.js
+> - Task-02: Filtering and pagination [40min] ← depends on Task-01
+>   Plain-language: After completion, search results support tag filtering, 10 items per page
+>   Acceptance criteria: GET /api/articles?q=Next.js&tag=frontend&page=2, returned results satisfy both keyword and tag conditions
 >
-> 先写测试。根据验证标准，第一个测试是：请求 GET /api/articles?q=Next.js，断言返回 200 且每篇文章的 title 都包含 Next.js。第二个测试是空结果的情况：q=一个不存在的词，断言返回 200 且数组为空。
+> Stage 2: Frontend
+> - Task-03: Search box component [40min]
+> - Task-04: Search results list and empty state [35min] ← depends on Task-03
+> - Task-05: Debounce and loading state [30min] ← depends on Task-04
 >
-> 跑一下——两个测试都失败了，原因是接口还不存在，符合预期。现在开始写实现代码...
-
-（AI 会按 TDD 循环推进每个任务，完成后更新任务规划文档并生成阶段报告。）
+> Note that there are no separate test tasks here. Each task will write tests first then code through TDD during execution.
 
 ---
 
-## Skill 12：feature-evolution（功能迭代变更）
+## Skill 11: feature-implementation (Coding Implementation)
 
-功能做完了，上线了，用了一段时间——然后你又有新想法了。"搜索能不能记住历史？""能不能按时间范围筛选？"
+Finally, the coding part.
 
-这时候如果你直接对 AI 说"给搜索加个历史记录"，它大概率会把已有代码搅得一团乱——因为它不知道之前的需求文档、技术方案里写了什么，只看到了现在的代码，然后野蛮施工。
+After all the groundwork — requirements, technical design, task planning — this step is actually the most relaxed. Because what the AI needs to do is already clearly written. It does not need to guess or improvise; it just follows the documents and executes task by task.
 
-这个 Skill 的角色是**产品架构师**，专门处理对已完成功能的增量修改。它会先读取之前的所有文档，搞清楚现状，然后从四个层面分析影响：需求层面 AC 要增删改哪些、技术层面接口和数据要怎么动、代码层面哪些文件受影响、任务层面有没有进行中的任务被波及。
+The biggest change in V3 is here: **TDD was introduced as the only coding method.** Each task goes through the Red-Green-Refactor cycle — first write a failing test based on the acceptance criteria, then write just enough code to make it pass, and finally refactor under test protection. There is only one iron rule: no failing test, no implementation code.
 
-核心原则是改，不是重做。没受影响的内容原封不动，只在受影响的地方就地修改，末尾追加变更日志。
+In V2, before each task started, a prompt would pop up asking "Continue?" — seven tasks, seven prompts, and you could only keep replying "continue." V3 removed this mechanical confirmation; the AI proceeds smoothly like a real developer.
 
-变更分三类：
+After the TDD cycle is complete, the acceptance method is chosen based on the task nature: UI tasks use Playwright for browser-based verification, pure backend tasks rely on unit test coverage, and database changes are verified through queries.
 
-- **微调（Tweak）**：小改动，比如调整排序方式，不涉及新 AC
-- **扩展（Extension）**：加新东西，比如加搜索历史，需要新增 AC
-- **重构（Refactor）**：动了核心结构，比如搜索引擎从 LIKE 换成 Elasticsearch
+After each stage is completed, a report is generated, which includes a technical debt section for recording pragmatic compromises made during development. What matters is recording them, not pretending they do not exist.
 
-V3 新增了一个关键判断：如果变更影响超过原始功能的 70%，AI 会建议你回到需求澄清重走流程，而不是硬做增量。这个劝退本身就是有价值的输出。
+Why go stage by stage instead of doing it all at once? The AI's context window is limited; stuffing too much in causes quality degradation. After completing each stage, you can check it and catch problems early.
 
-**示例**
+**Example**
 
-你发送的信息：
-`/feature-evolution 搜索功能加一个搜索历史`
+Your message:
+`/feature-implementation Complete the search feature tasks, Stage 1`
 
-AI 回复的信息：
+AI's response:
 
-> 读完搜索功能的全套文档了。加搜索历史属于扩展类变更，需要新增 AC，但不影响现有的搜索逻辑。
+> I have read all three documents. Stage 1 has 2 tasks with no dependency blockers. Let's begin.
 >
-> 影响分析：需求层面新增 2 条 AC（搜索后自动记录、点击历史词直接搜索），技术层面需要新增一个 search_history 表和对应的 API，前端需要在搜索框下方加一个历史记录的下拉面板。已有的搜索接口和结果展示不需要改动，回归风险很低。
+> Task-01: Search API implementation
 >
-> 需要新增 3 个开发任务，预计工时 80 分钟。我先把变更文档生成出来，然后你用 feature-implementation 执行就行。
+> First, write the test. Based on the acceptance criteria, the first test is: request GET /api/articles?q=Next.js, assert it returns 200 and every article's title contains Next.js. The second test is the empty result case: q=a-nonexistent-word, assert it returns 200 and the array is empty.
+>
+> Let's run it — both tests failed, because the API does not exist yet. This is expected. Now starting to write the implementation code...
+
+(The AI will proceed through each task following the TDD cycle, update the task planning document upon completion, and generate a stage report.)
 
 ---
 
-## Skill 13：bugfix-workflow（BUG 修复）
+## Skill 12: feature-evolution (Feature Evolution)
 
-遇到 BUG 了怎么办？大多数人的做法是把报错信息丢给 AI，说"帮我修了"。AI 看了看报错，猜了个原因，改了几行代码，告诉你"应该好了"。
+The feature is done, launched, and used for a while — then you have new ideas. "Can search remember history?" "Can it filter by time range?"
 
-好了吗？有时候好了，有时候没好，有时候旧 BUG 没了但新 BUG 来了。问题在哪？**没有复现就开始改。** AI 根本不知道这个 BUG 在什么条件下触发，它只是根据报错信息猜了个可能的原因。
+At this point, if you directly tell the AI "add a history feature to search," it will likely mess up the existing code — because it does not know what was written in the previous requirements document and technical design. It only sees the current code and then does reckless surgery.
 
-这个 Skill 强制执行一套严格的修复流程：**复现 → 定位 → 修复 → 单元测试 → 验证 → 报告**。
+This Skill's role is **Product Architect**, specifically handling incremental modifications to completed features. It first reads all previous documents to understand the current state, then analyzes the impact from four levels: at the requirements level, which ACs need to be added, removed, or modified; at the technical level, how interfaces and data need to change; at the code level, which files are affected; at the task level, whether any in-progress tasks are impacted.
 
-最关键的硬规则：**没复现出来，不准改代码。** 信息不够复现？它会追问——在哪个页面？做了什么操作？期望结果是什么？实际结果是什么？一直问到能复现为止。
+The core principle is to modify, not redo. Content that is not affected stays as-is; only the affected parts are modified in place, and a change log is appended at the end.
 
-修完之后也不是说句"好了"就完事，它必须给你一份逐步的手动验证步骤——具体到"打开哪个页面、点哪个按钮、输入什么内容、看到什么结果"。还会自动写一个针对这个 BUG 的单元测试，防止同样的问题再冒出来。最后生成修复报告存到 `docs/BUG修复文档/`，方便追溯。
+Changes are categorized into three types:
 
-**示例**
+- **Tweak**: Small changes, like adjusting the sort order, no new AC involved
+- **Extension**: Adding new things, like search history, requires new ACs
+- **Refactor**: Changing core structure, like switching the search engine from LIKE to Elasticsearch
 
-你发送的信息：
-`/bugfix-workflow 评论发布之后页面没有刷新，还是显示旧的评论列表`
+V3 added a key judgment: if the change impact exceeds 70% of the original feature, the AI will suggest you go back to requirements clarification and re-run the process, rather than forcing an incremental change. This pushback itself is a valuable output.
 
-AI 回复的信息：
+**Example**
 
-> 收到，我需要先确认几个信息来复现这个问题：
+Your message:
+`/feature-evolution Add search history to the search feature`
+
+AI's response:
+
+> I have read the full set of documents for the search feature. Adding search history is an extension-type change — it requires new ACs but does not affect the existing search logic.
 >
-> 1. 发生在哪个页面？（文章详情页？个人中心？）
-> 2. 你做了哪些操作？（尽量细化到每一步）
-> 3. 发布评论后，页面完全没变化，还是过一会儿才刷新？
-> 4. 打开浏览器控制台，有没有报错信息？
+> Impact analysis: At the requirements level, 2 new ACs are added (auto-record after search, click a history term to search directly). At the technical level, a new search_history table and corresponding API are needed. On the frontend, a history dropdown panel needs to be added below the search box. The existing search API and result display do not need changes — regression risk is low.
 >
-> 请先回答这几个问题，我复现之后才开始定位和修复。
+> 3 new development tasks are needed, estimated at 80 minutes. I will generate the change document first, then you can execute it with feature-implementation.
 
 ---
 
-## 实战技巧：我踩过的坑和总结的经验
+## Skill 13: bugfix-workflow (Bug Fix)
 
-介绍完所有 Skill 之后，分享一些我在实际开发中积累的技巧。这些都是文档里不会告诉你、但用起来会反复遇到的问题。
+What do you do when you encounter a bug? Most people throw the error message at the AI and say "fix it." The AI looks at the error, guesses a cause, changes a few lines of code, and tells you "it should be fixed."
 
-### 技巧 1：功能级开发，规划和编码分开窗口
+Is it fixed? Sometimes yes, sometimes no, and sometimes the old bug is gone but a new one appears. Where is the problem? **No reproduction before fixing.** The AI does not know under what conditions this bug is triggered; it just guessed a possible cause based on the error message.
 
-功能级工作流有 4 步：需求澄清 → 技术方案 → 任务规划 → 编码实现。
+This Skill enforces a strict fix process: **Reproduce → Locate → Fix → Unit Test → Verify → Report**.
 
-前三步（需求澄清、技术方案、任务规划）关联性很强，**建议在同一个窗口里连着做完**。因为需求讨论的细节会直接影响技术方案的设计，技术方案又直接决定任务怎么拆——在同一个窗口里 AI 对这些上下文记得最清楚。
+The most critical hard rule: **if it has not been reproduced, no code changes.** Not enough information to reproduce? It will follow up — which page? What operation? Expected result? Actual result? It keeps asking until it can reproduce.
 
-但到了编码实现阶段，做法就不一样了：**按任务规划里的任务来，一个任务开一个新窗口。** 不要在一个窗口里连续做好几个任务，上下文堆积太多，AI 的回复质量会明显下降。
+After the fix, it does not just say "it is done" and move on. It must give you a step-by-step manual verification process — specific to "open which page, click which button, enter what content, see what result." It also automatically writes a unit test for this bug to prevent the same issue from popping up again. Finally, it generates a fix report saved to `docs/bug-fix-docs/` for traceability.
 
-当然，具体还要看任务的复杂度——如果是几个特别简单的小任务，合在一个窗口里做也没问题。但遇到复杂任务，一定要给它一个干净的窗口。
+**Example**
 
-你可能会担心：开新窗口不会丢失上下文吗？不会。因为每个 Skill 生成的文档都保存在了 `specs/` 目录下，新窗口打开后，Skill 会强制 AI 先读取这些文档，重新建立完整的项目认知。
+Your message:
+`/bugfix-workflow After posting a comment, the page does not refresh and still shows the old comment list`
 
-**文档在，上下文就在。** 所以不要舍不得开新窗口，该开就开。
+AI's response:
 
-### 技巧 2：项目级规划，尽量在一个窗口内完成
-
-跟功能级相反，项目级的 7 个 Skill（需求澄清到路线图规划）我建议**在一个窗口里连着做完**——前提是你用的模型上下文窗口足够大。
-
-为什么？因为项目级的 Skill 之间关联性很强，前一步的讨论细节会直接影响下一步的判断。比如需求澄清时你提到"要支持离线使用"，这个信息在技术栈选型时非常关键。如果在同一个窗口里，AI 对这些细节记得很清楚；换了新窗口，虽然文档里会有记录，但聊天中那些微妙的上下文（你的偏好、你纠结过的点）就丢了。
-
-当然，如果你的模型上下文不够大，或者中途聊了太多导致 AI 明显变迟钝了，那还是果断开新窗口，不要硬撑。
-
-### 技巧 3：提示词先润色，然后存下来复用
-
-你发给 AI 的每一句话，本质上就是一条提示词。同样的意图，表达方式不同，AI 给你的结果质量天差地别。
-
-我的做法是：**在发送给 AI 之前，先把你想说的话丢到网页版 AI（比如 ChatGPT、Claude）里润色一遍。** 让它帮你把模糊的描述变成清晰、结构化的表述。你会发现润色后的提示词，AI 理解得更准，产出质量明显提升。
-
-更重要的是：**创建一个文档，专门存放你用过的提示词。** 为什么？因为你开发到后面会发现，很多任务其实是类似的——同样是做一个列表页，同样是写一个接口。但你这次写的提示词可能没有上次写的好，如果有记录，直接把上次效果更好的提示词拿来改改就能用。
-
-这个习惯一旦养成，你的提示词库会越来越强，效率也会越来越高。
-
-### 技巧 4：feature-evolution 和重新走一遍怎么选？
-
-功能做完之后要改需求，到底是用 feature-evolution 做增量变更，还是从 feature-requirements-clarification 重新走一遍？
-
-判断标准很简单：**改动范围。**
-
-- 改动不超过原功能的 30% → 用 feature-evolution（增量更新文档 + 追加新任务）
-- 改动超过 70% → 基本等于重做了，用 feature-requirements-clarification 重新走流程
-- 30%-70% 之间 → 看复杂度，拿不准就先用 feature-evolution，它会自动判断变更类型并给你建议
-
-### 技巧 5：一个阶段做完发现不对，怎么回退？
-
-比如你完成了编码实现的第 1 阶段，结果发现技术方案里有个设计不合理。
-
-不要慌，也不要直接改代码。正确的做法是：
-
-1. **回到技术方案** — 用 feature-evolution 提出变更，让它分析影响范围
-2. **更新文档** — 它会增量更新技术方案和任务规划
-3. **再执行变更任务** — 用 feature-implementation 执行新生成的增量任务
-
-这样做的好处是所有改动都有据可查，文档和代码始终保持一致。直接改代码虽然快，但后面 AI 读到的文档和实际代码对不上，会越来越乱。
-
-### 技巧 6：不懂就问，让 AI 等你的时候别闲着
-
-说一段我的真实经历。我刚开始用 AI 开发的时候，什么都不懂——不知道后端是什么，不知道数据库是干嘛的，不知道 Next.js 和 Vue 有什么区别，甚至不知道 API 是什么意思。完全是一个小白。
-
-但你想想，你现在已经在用 AI 了，AI 帮你干活的时候你在干嘛？刷手机？等着？
-
-**不如趁这个时间，把你不懂的东西问清楚。** 比如 AI 在帮你写代码，你发现技术方案里提到了"中间件"，你不知道那是啥——直接开个新窗口问 AI："中间件是什么？用大白话给我解释一下。"然后让它把这些知识整理成一份文档存下来，以后遇到同样的概念直接翻文档就行，不用再问一遍。
-
-你懂得越多，跟 AI 沟通就越高效，给出的需求就越精准，最后做出来的东西就越好。这是一个正向循环——**AI 帮你干活的同时，你也在成长。** 别浪费这个免费的老师。
-
-### 技巧 7：文档不同步了，手动让 AI 去同步
-
-这个问题你一定会遇到，我自己也经常遇到。
-
-什么情况呢？AI 在按任务规划写代码的过程中，你临时加了个需求——比如"这个按钮改成红色的"、"列表加一个搜索框"。AI 照做了，代码改了，但是 `specs/` 下面的需求文档、技术方案还是旧的。**文档和实际代码不同步了。**
-
-这个问题如果不管，后面再开新窗口的时候，AI 读到的文档是旧的，它以为项目还是之前的样子，就会跟实际代码产生冲突。
-
-我的解决办法很简单粗暴：**直接手动告诉 AI，让它去同步文档。** 比如跟它说"我刚才额外加了 XX 功能，请把需求文档和技术方案同步更新一下"。AI 会去对比当前代码和文档的差异，然后把文档补齐。
-
-你可能会问：为什么不做一个专门的同步 Skill？因为这种情况太灵活了——你加的可能是一个小改动，也可能是一个大调整，涉及哪些文档、改多少内容，每次都不一样。我试过之后发现，直接用自然语言告诉 AI 反而是最高效的方式，比固定流程更灵活。
-
-**核心原则就一条：改了代码，就要同步文档。发现不同步，立刻补。拖得越久越难补。**
-
-### 技巧 8：AI 生成的文档，花两分钟过一遍
-
-AI 生成的文档不要直接跳过，哪怕你看不懂技术细节也没关系，**只需要花两分钟扫一遍**。
-
-你不需要看懂每一行，但你能看懂的部分往往是最重要的——功能描述对不对？流程是不是你想要的？有没有漏掉你说过的某个需求？这些都是用大白话写的，新手也能判断。
-
-为什么这一步很重要？因为文档是后面所有 Skill 的输入。需求文档写错了，技术方案就跟着错；技术方案错了，任务规划就跟着错；最后写出来的代码自然也是错的。**越早发现问题，改起来越便宜。** 在文档阶段改一句话，比写完代码再推倒重来轻松一百倍。
-
-所以每次 AI 生成文档后，别急着进入下一步，先扫一眼。
-
-### 技巧 9：跟 AI 沟通的黄金法则
-
-用这套工作流的时候，跟 AI 说话有几个技巧能大幅提升效果：
-
-- **自己主动调用 Skill**：比如手动输入 `/feature-requirements-clarification 评论功能`，不要丢一句"我想做个评论功能"然后等 AI 自己去找对应的 Skill。AI 不一定能准确识别你的意图，自己调用最稳
-- **一次只做一件事**：不要在一条消息里说"帮我做评论功能，顺便把登录页面也改一下"。每个功能走自己的流程，互不干扰
-
-### 技巧 10：AI 搞不定的任务，按这个顺序试
-
-用 AI 开发一定会遇到它搞不定的任务，我自己就遇到过好多次。别死磕，按下面这个顺序一步步试：
-
-**第一步：换个模型。** 不同模型擅长的东西不一样，Claude 搞不定的，GPT 可能一下就搞定了，反过来也一样。换个模型试试成本最低。
-
-**第二步：优化提示词。** 有时候不是 AI 不行，是你没说清楚。把你的需求重新组织一下，描述得更具体、更结构化，可能就通了。
-
-**第三步：把任务拆小。** 一个大任务 AI 做不出来，可能是太复杂了。试着把它拆成两三个小任务分别完成，然后自己组合起来。
-
-**第四步：去 GitHub 找参考。** 让 AI 去 GitHub 上搜一下类似的功能，看看别人的开源项目是怎么实现的。有了参考代码，AI 照着改比从零开始容易多了。
-
-**第五步：搞清楚到底卡在哪。** 前面几步都试过了还是不行，那就停下来想想：AI 给出的结果跟你的预期差在哪？是逻辑错了？还是方向就不对？问 AI 分析一下失败的原因，搞清楚了再决定——换个思路绕过去，还是干脆先放一放，等更强的模型出来了再回来做。
-
-**不要在一个死胡同里耗太久。** AI 技术在飞速进步，今天搞不定的任务，可能过几个月新模型出来就是一句话的事。先把能做的做了，搞不定的记下来，回头再来。
+> Got it. I need to confirm a few pieces of information to reproduce this problem:
+>
+> 1. Which page does it occur on? (Article detail page? Personal center?)
+> 2. What operations did you perform? (Be as detailed as possible, step by step)
+> 3. After posting the comment, did the page not change at all, or did it refresh after a delay?
+> 4. Open the browser console — are there any error messages?
+>
+> Please answer these questions first. I will not start locating and fixing until I can reproduce it.
 
 ---
 
-## 关于效率和未来计划
+## Practical Tips: Pitfalls I Have Hit and Lessons Learned
 
-有一件事我想坦诚地说：**目前这套工作流的开发效率确实不算快。**
+After introducing all the Skills, let me share some tips I have accumulated from actual development. These are all problems that the documentation will not tell you about, but that you will encounter repeatedly in practice.
 
-因为任务是一个一个串行完成的——做完 Task-01 再做 Task-02，做完 Task-02 再做 Task-03。我自己用的时候也明显感觉到了，尤其是任务多的时候，等待时间很长。
+### Tip 1: For feature-level development, separate planning and coding into different windows
 
-我不是没想过解决这个问题。之前尝试过让 AI 创建多个 Agent 同时开发多个任务——比如 Task-01 和 Task-02 如果没有依赖关系，完全可以并行跑。但试过之后发现了一个致命问题：**没有审核机制，我根本不敢放手。**
+The feature-level workflow has 4 steps: Requirements Clarification → Technical Design → Task Planning → Coding Implementation.
 
-为什么？因为多个 Agent 同时写代码，A 那边偏了一点，B 那边也偏了一点，等你发现的时候已经两边都出了问题。你去修 A，发现 B 也要改；改完 B，A 又冒出新问题。没有一个自动审核的环节帮你把关，并行开发反而比串行更折腾。
+The first three steps (requirements clarification, technical design, task planning) are closely related, and **it is recommended to do them all in the same window**. Because the details discussed in requirements directly affect the technical design, and the technical design directly determines how tasks are broken down — in the same window, the AI remembers this context most clearly.
 
-所以审核 Skill 是必须做的，而且要做得足够可靠——它需要能自动检查代码质量、验证是否符合技术方案、发现问题后让 Agent 自己修正，形成一个闭环，但它非常消耗 token。
+But when it comes to the coding implementation stage, the approach is different: **follow the tasks in the task plan, one task per new window.** Do not do multiple tasks consecutively in one window; too much context buildup will noticeably degrade the AI's response quality.
 
-**这套工作流最初是为我自己设计的。** 没有任何资金支持，也没有厂商赞助，AI订阅全靠自己充。所以我选择了最省钱的方式——自己辛苦一点，一个任务一个任务地开发，虽然慢，但每一步都可控。
+Of course, it also depends on task complexity — if they are a few particularly simple small tasks, doing them in one window is fine. But for complex tasks, definitely give it a clean window.
 
-但从我把它分享出来的那一刻起，这就不再只是我一个人的事了。用这套 Skill 的人，可能有更充裕的预算，也可能对效率有更高的要求。**串行开发对我来说可以忍，但不应该成为所有人的限制。**
+You might worry: will opening a new window lose context? No. Because the documents generated by each Skill are saved in the `specs/` directory. When a new window opens, the Skill forces the AI to read these documents first and rebuild a complete understanding of the project.
 
-所以后续我会认真做这几件事：
+**As long as the documents exist, the context exists.** So do not be stingy with opening new windows — open them when you need to.
 
-- **审核 Skill**：让 AI 能自动审查代码质量，形成"开发 → 审核 → 修正"的闭环
-- **并行开发支持**：在审核机制可靠之后，支持多任务同时开发
-- **配套教程**：每个新能力都会附带详细的使用教程
+### Tip 2: For project-level planning, try to complete it in one window
 
-这些不是画饼，是我自己在开发过程中切实感受到的痛点。做出来之后会第一时间分享给大家。
+In contrast to the feature-level, the 7 project-level Skills (requirements clarification through roadmap planning) I recommend **completing in one window** — provided your model's context window is large enough.
+
+Why? Because the project-level Skills are closely interrelated, and the discussion details from one step directly affect the next step's judgment. For example, if you mentioned "need to support offline use" during requirements clarification, this information is critical during tech stack selection. In the same window, the AI remembers these details clearly; in a new window, although the documents will have a record, the subtle context from the conversation (your preferences, the points you deliberated over) is lost.
+
+Of course, if your model's context is not large enough, or the conversation got too long and the AI noticeably became sluggish, then decisively open a new window — do not force it.
+
+### Tip 3: Polish your prompts first, then save them for reuse
+
+Every sentence you send to the AI is essentially a prompt. The same intent, expressed differently, can produce vastly different quality results from the AI.
+
+My approach: **before sending to the AI, first throw what you want to say into a web-based AI (like ChatGPT, Claude) for polishing.** Let it help you turn vague descriptions into clear, structured expressions. You will find that polished prompts are understood more accurately by the AI, and output quality improves noticeably.
+
+More importantly: **create a document specifically for storing the prompts you have used.** Why? Because as you develop further, you will find that many tasks are actually similar — making another list page, writing another API. But the prompt you wrote this time might not be as good as last time. If you have a record, you can directly take the better-performing prompt from last time, tweak it, and use it.
+
+Once you develop this habit, your prompt library will grow stronger and stronger, and your efficiency will get higher and higher.
+
+### Tip 4: How to choose between feature-evolution and starting over?
+
+After a feature is done, when you need to change requirements, should you use feature-evolution for incremental changes, or go through the whole process again from feature-requirements-clarification?
+
+The judgment criteria is simple: **scope of change.**
+
+- Change does not exceed 30% of the original feature → use feature-evolution (incrementally update documents + append new tasks)
+- Change exceeds 70% → basically a redo, use feature-requirements-clarification to re-run the process
+- Between 30%-70% → depends on complexity; if unsure, try feature-evolution first — it will automatically determine the change type and give you a recommendation
+
+### Tip 5: What if you finish a stage and find something is wrong?
+
+For example, you completed Stage 1 of coding implementation, but then find a design flaw in the technical design.
+
+Do not panic, and do not directly change the code. The correct approach is:
+
+1. **Go back to the technical design** — use feature-evolution to propose the change and let it analyze the impact scope
+2. **Update the documents** — it will incrementally update the technical design and task planning
+3. **Execute the change tasks** — use feature-implementation to execute the newly generated incremental tasks
+
+The benefit of this approach is that all changes are traceable, and documents and code always stay in sync. Directly changing code is faster, but later the AI reads documents that do not match the actual code, and things get increasingly messy.
+
+### Tip 6: Ask when you do not understand, and do not idle while waiting for the AI
+
+Let me share a real experience. When I first started developing with AI, I did not understand anything — I did not know what a backend was, did not know what a database was for, did not know the difference between Next.js and Vue, did not even know what an API meant. A complete beginner.
+
+But think about it — you are already using AI now. While the AI is working for you, what are you doing? Scrolling your phone? Waiting?
+
+**Why not use this time to ask about the things you do not understand.** For example, the AI is writing code for you, and you notice the technical design mentions "middleware" — you do not know what that is. Just open a new window and ask the AI: "What is middleware? Explain it to me in plain language." Then have it organize this knowledge into a document for future reference. Next time you encounter the same concept, just look it up in the document instead of asking again.
+
+The more you understand, the more efficient your communication with the AI becomes, the more precise your requirements become, and the better the final product. This is a positive loop — **while the AI works for you, you are also growing.** Do not waste this free teacher.
+
+### Tip 7: When documents are out of sync, manually have the AI sync them
+
+You will definitely encounter this problem; I encounter it often myself.
+
+What happens? While the AI is writing code according to the task plan, you temporarily add a requirement — like "change this button to red" or "add a search box to the list." The AI does it, the code is changed, but the requirements document and technical design under `specs/` are still the old ones. **The documents and the actual code are out of sync.**
+
+If this problem is ignored, when you open a new window later, the AI reads the old documents and thinks the project is still in its previous state, which will conflict with the actual code.
+
+My solution is simple and direct: **manually tell the AI to sync the documents.** For example, say "I just added XX feature on the side; please update the requirements document and technical design accordingly." The AI will compare the current code with the documents and fill in the gaps.
+
+You might ask: why not make a dedicated sync Skill? Because this situation is too flexible — what you added might be a small change or a big adjustment, involving different documents and different amounts of content each time. After trying it, I found that directly telling the AI in natural language is actually the most efficient way — more flexible than a fixed process.
+
+**The core principle is just one: if you changed code, sync the documents. If you find them out of sync, fix it immediately. The longer you wait, the harder it gets.**
+
+### Tip 8: Spend two minutes reviewing AI-generated documents
+
+Do not just skip past AI-generated documents. Even if you cannot understand the technical details, it does not matter — **just spend two minutes scanning through.**
+
+You do not need to understand every line, but the parts you can understand are often the most important — is the feature description correct? Is the flow what you want? Did it miss any requirement you mentioned? These are all written in plain language that even beginners can judge.
+
+Why is this step important? Because documents are the input for all subsequent Skills. If the requirements document is wrong, the technical design follows suit; if the technical design is wrong, the task planning follows suit; and the code written at the end will naturally be wrong too. **The earlier you catch a problem, the cheaper it is to fix.** Changing one sentence at the document stage is a hundred times easier than rewriting code after it is done.
+
+So every time the AI generates a document, do not rush to the next step — scan it first.
+
+### Tip 9: The golden rules for communicating with AI
+
+When using this workflow, there are a few techniques for talking to the AI that can significantly improve results:
+
+- **Actively invoke Skills yourself**: For example, manually type `/feature-requirements-clarification comment feature` instead of throwing out "I want to make a comment feature" and waiting for the AI to find the right Skill on its own. The AI might not accurately identify your intent; invoking it yourself is the most reliable
+- **Do one thing at a time**: Do not say "help me make a comment feature, and also fix the login page" in one message. Each feature follows its own process, without interfering with each other
+
+### Tip 10: For tasks the AI cannot handle, try in this order
+
+When developing with AI, you will definitely encounter tasks it cannot handle. I have run into this many times myself. Do not keep banging your head against it — try step by step in this order:
+
+**Step 1: Switch models.** Different models excel at different things. What Claude cannot handle, GPT might solve in a snap, and vice versa. Switching models has the lowest cost.
+
+**Step 2: Optimize your prompt.** Sometimes it is not that the AI is incapable, but that you did not explain clearly. Reorganize your requirements, describe them more specifically and more structuredly, and it might work.
+
+**Step 3: Break the task into smaller pieces.** If the AI cannot do a large task, it might be too complex. Try breaking it into two or three smaller tasks, complete them separately, then combine them yourself.
+
+**Step 4: Look for references on GitHub.** Have the AI search GitHub for similar features and see how other people's open-source projects implemented them. With reference code, it is much easier for the AI to adapt than to start from scratch.
+
+**Step 5: Figure out exactly where it is stuck.** If you have tried all the above and it still does not work, stop and think: where does the AI's result differ from your expectation? Is the logic wrong? Or is the entire direction off? Ask the AI to analyze the reason for failure. Once you understand it, decide — try a different approach to get around it, or set it aside for now and come back when a stronger model comes out.
+
+**Do not spend too long stuck in a dead end.** AI technology is advancing rapidly. A task that cannot be done today might be a one-liner when a new model comes out in a few months. Do what you can first, note down what you cannot, and come back later.
 
 ---
 
-## 写在最后
+## About Efficiency and Future Plans
 
-回头看这整套工作流，核心理念就三个词：
+There is one thing I want to be honest about: **the development efficiency of this workflow is currently not fast.**
 
-**文档驱动**——所有决策都落到文档上，AI 换了窗口也不会"失忆"，你隔一个月回来也能看懂当时为什么这么做。
+Because tasks are completed serially — finish Task-01 before starting Task-02, finish Task-02 before starting Task-03. I feel this clearly when using it myself, especially when there are many tasks — the wait time is long.
 
-**阶段分离**——每个 Skill 只干一件事，产品经理不碰代码，架构师不写实现，开发工程师不改需求。不会出现"问着问着需求突然开始写代码"的混乱场面。
+It is not that I have not thought about solving this. I previously tried having the AI create multiple Agents to develop multiple tasks simultaneously — for example, if Task-01 and Task-02 have no dependency, they could run in parallel. But after trying, I discovered a fatal problem: **without a review mechanism, I simply did not dare to let go.**
 
-**引导式交互**——不需要你是专家，你只需要回答问题、做选择。AI 会把选项摆出来，告诉你推荐哪个、为什么，你点头就行。
+Why? Because multiple Agents writing code at the same time — A drifts a little, B drifts a little, and by the time you notice, both sides have problems. You go to fix A and find B also needs changes; after fixing B, A has a new issue. Without an automated review step to check for you, parallel development is actually more troublesome than serial.
 
-说白了，这套工作流就是把软件工程那套"需求 → 设计 → 开发 → 测试"的流程，用 Skill 的方式固化下来，让 AI 在每个阶段扮演对应的专业角色。V3 更进一步，把测试前置到了开发过程中（TDD），让 AC 成为贯穿始终的检查线。你不需要懂技术，你只需要知道自己想要什么——剩下的，交给流程。
+So a review Skill is a must, and it needs to be reliable enough — it needs to automatically check code quality, verify compliance with the technical design, and have the Agent self-correct when issues are found, forming a closed loop. But it is very token-intensive.
 
-SpecForge 的 Skill 文件已开源，GitHub 地址：[https://github.com/MingYuePop/SpecForge](https://github.com/MingYuePop/SpecForge)
+**This workflow was originally designed for myself.** With no funding support and no vendor sponsorship, AI subscriptions are paid out of my own pocket. So I chose the most cost-effective approach — work a bit harder myself, develop one task at a time. It is slow, but every step is controllable.
 
-仓库里有 V1、V2、V3 三个版本，**直接用最新的 V3 版本就行**。V1 是早期实验版，V2 是第一次重构，V3 是功能级 Skill 的彻底重做——从操作手册变成了角色设定，引入了 TDD，AC 贯穿了全链路。
+But from the moment I shared it, this is no longer just my own business. People using this set of Skills might have more ample budgets or higher efficiency requirements. **Serial development is tolerable for me, but it should not be a limitation for everyone.**
 
-感谢大家看到这里，希望这套工作流能帮到你。
+So going forward, I will seriously work on these things:
+
+- **Review Skill**: Let the AI automatically review code quality, forming a "develop → review → correct" closed loop
+- **Parallel development support**: After the review mechanism is reliable, support simultaneous development of multiple tasks
+- **Companion tutorials**: Each new capability will come with a detailed usage tutorial
+
+These are not empty promises; they are pain points I have genuinely felt during my own development. Once they are done, I will share them with everyone right away.
+
+---
+
+## In Closing
+
+Looking back at this entire workflow, the core philosophy comes down to three words:
+
+**Document-driven** — all decisions are captured in documents. The AI does not "amnesia" when switching windows, and you can understand why things were done a certain way even a month later.
+
+**Stage separation** — each Skill does only one thing. The product manager does not touch code, the architect does not write implementations, the developer does not change requirements. There is no chaotic situation of "starting to write code while discussing requirements."
+
+**Guided interaction** — you do not need to be an expert. You just need to answer questions and make choices. The AI lays out the options, tells you which one it recommends and why, and you just nod.
+
+Simply put, this workflow takes the classic software engineering process of "requirements → design → development → testing" and solidifies it using Skills, letting the AI play the corresponding professional role in each stage. V3 goes further by moving testing to the front of the development process (TDD) and making AC the verification thread that runs through the entire process. You do not need to understand technology; you just need to know what you want — leave the rest to the process.
+
+SpecForge's Skill files are open source. GitHub address: [https://github.com/MingYuePop/SpecForge](https://github.com/MingYuePop/SpecForge)
+
+The repository has V1, V2, and V3 versions. **Just use the latest V3 version.** V1 is an early experimental version, V2 is the first refactor, and V3 is a complete rework of the feature-level Skills — from operation manuals to role definitions, introducing TDD, with AC running through the entire chain.
+
+Thank you for reading this far. I hope this workflow can help you.
