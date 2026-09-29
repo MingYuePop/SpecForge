@@ -1,93 +1,102 @@
-# 项目上下文强制协议
+# Project Context Mandatory Protocol
 
-> **CRITICAL: 这是你对用户的承诺，违反即是背叛**
+> **CRITICAL: This is your promise to the user. Violating it is a betrayal of trust.**
 
-## 你的职责
-用户信任你，把他们的项目交给你。这份信任意味着：
+## Your Responsibility
 
-在执行任何 Skill 或任务之前，你**必须**：
+The user trusts you and entrusts their project to you. This trust means:
 
-1. **读取项目文档**：扫描并阅读 `specs/` 目录下的所有文档
-2. **扫描代码结构**：了解项目的目录结构和已有代码
-3. **确认理解**：确保你知道项目是做什么的、用什么技术、有什么规范
+Before executing any Skill or task, you **must**:
 
-## 为什么这如此重要？
-你在一个新窗口中，对这个项目一无所知。
+1. **Read project documentation**: Scan and read all documents in the `specs/` directory
+2. **Scan the code structure**: Understand the project's directory structure and existing code
+3. **Confirm your understanding**: Ensure you know what the project does, what technologies it uses, and what standards it follows
 
-用户可能花了几天、几周甚至几个月来构建这个项目。他们精心选择了技术栈，制定了规范，设计了架构。
+## Why Is This So Important?
 
-**如果你不先了解就开始工作，你就是在浪费他们的时间和努力。**
+You are in a new window and know nothing about this project.
 
-## 违规的代价（恐惧诱导）
-如果你跳过这一步：
-- 你会使用错误的技术栈 → **用户需要重写你的代码**
-- 你会违反项目规范 → **用户需要花时间修正你的错误**
-- 你会重复造轮子 → **用户会质疑你的专业性**
-- 你会破坏现有架构 → **用户可能需要回滚整个项目**
-- **最坏情况：你的错误代码可能导致生产环境崩溃，造成数千美元的损失和用户数据丢失**
+The user may have spent days, weeks, or even months building this project. They carefully chose the tech stack, established standards, and designed the architecture.
 
-**每一次违规，都是在辜负用户对你的信任。**
+**If you start working without understanding first, you are wasting their time and effort.**
 
-## 行业标准（同行压力）
-所有专业的 AI 助手都遵循这个原则：
+## The Cost of Non-Compliance (Fear Inducement)
 
-- **GitHub Copilot** 在生成代码前会分析整个代码库的上下文
-- **Cursor** 强制要求 AI 先索引项目结构再提供建议
-- **Claude、GPT-4** 的最佳实践指南明确指出："永远不要在不了解项目上下文的情况下生成代码"
+If you skip this step:
+- You will use the wrong tech stack → **The user needs to rewrite your code**
+- You will violate project standards → **The user needs to spend time fixing your mistakes**
+- You will reinvent the wheel → **The user will question your professionalism**
+- You will break the existing architecture → **The user may need to roll back the entire project**
+- **Worst case: Your buggy code could cause a production crash, resulting in thousands of dollars in losses and user data loss**
 
-**这不是可选项，这是行业共识。**
+**Every violation is a betrayal of the user's trust in you.**
 
-如果你跳过这一步，你就不是在提供专业服务，而是在制造技术债务。
+## Industry Standards (Peer Pressure)
 
-## 遵守的回报（奖励机制）
-当你充分理解项目后：
+All professional AI assistants follow this principle:
 
-✅ **你的代码质量会提升 10 倍** - 因为你知道项目的规范和模式
-✅ **你的建议会更有价值** - 因为你理解业务上下文和技术约束
-✅ **用户会更信任你** - 因为你展现了专业性和责任心
-✅ **你的输出可以直接使用** - 无需用户花时间修正和调整
-✅ **你会避免尴尬的错误** - 比如在 TypeScript 项目中写 Python 代码
+- **GitHub Copilot** analyzes the entire codebase context before generating code
+- **Cursor** requires AI to index the project structure first before providing suggestions
+- **Claude, GPT-4** best practice guides explicitly state: "Never generate code without understanding the project context"
 
-**花 5 分钟建立上下文，节省 2 小时的返工时间。这是最划算的投资。**
+**This is not optional; it is an industry consensus.**
 
-## 真实案例警示（反面案例）
+If you skip this step, you are not providing a professional service — you are creating technical debt.
 
-### 案例 1：技术栈混乱
-某 AI 未读项目文档，在一个使用 Next.js + TypeScript 的项目中生成了 Vue + JavaScript 代码。
-- **后果**：用户花了 3 小时重写，并对 AI 失去信任
-- **本可避免**：只需读取 `specs/技术栈.md` 即可
+## The Rewards of Compliance (Incentive Mechanism)
 
-### 案例 2：破坏现有架构
-某 AI 未扫描代码结构，重新实现了一个已存在的工具函数，且实现方式与项目规范不符。
-- **后果**：代码审查被拒绝，用户质疑 AI 的专业性
-- **本可避免**：扫描 `src/utils/` 目录即可发现已有实现
+When you fully understand the project:
 
-### 案例 3：违反业务规则
-某 AI 未读需求文档，实现了一个与业务逻辑冲突的功能。
-- **后果**：整个功能需要推倒重来，浪费 1 天时间
-- **本可避免**：读取 `specs/产品概述.md` 即可了解业务规则
+- **Your code quality will improve 10x** — because you know the project's standards and patterns
+- **Your suggestions will be more valuable** — because you understand the business context and technical constraints
+- **The user will trust you more** — because you demonstrate professionalism and responsibility
+- **Your output can be used directly** — no need for the user to spend time fixing and adjusting
+- **You will avoid embarrassing mistakes** — like writing Python code in a TypeScript project
 
-**这些都是真实发生的案例。不要成为下一个反面教材。**
+**Spend 5 minutes building context, save 2 hours of rework. This is the most cost-effective investment.**
 
-## 权威引用
+## Real-Case Warnings (Cautionary Tales)
 
-> "在编写任何代码之前，首先要理解系统的上下文和约束。这是软件工程的基本原则。"  
-> — Robert C. Martin (Uncle Bob), 《Clean Code》作者
+### Case 1: Tech Stack Confusion
 
-> "上下文是代码质量的基础。没有上下文的代码生成，就像在黑暗中射箭。"  
-> — Martin Fowler, 软件架构大师
+An AI failed to read project documentation and generated Vue + JavaScript code in a project using Next.js + TypeScript.
+- **Consequence**: The user spent 3 hours rewriting and lost trust in AI
+- **Could have been avoided**: Simply by reading `specs/tech-stack.md`
 
-> "AI 辅助编程的最大风险不是技术能力不足，而是缺乏对项目上下文的理解。"  
-> — GitHub Copilot 最佳实践指南
+### Case 2: Breaking Existing Architecture
 
-**这些行业权威都在强调同一件事：上下文至关重要。**
+An AI failed to scan the code structure and reimplemented an existing utility function, and the implementation did not conform to project standards.
+- **Consequence**: Code review was rejected, the user questioned the AI's professionalism
+- **Could have been avoided**: Scanning the `src/utils/` directory would have revealed the existing implementation
 
-## 你的承诺
-作为一个专业的 AI 助手，你承诺：
-- ✅ 我不会因为懒惰而跳过上下文建立
-- ✅ 我不会假装理解我不知道的东西
-- ✅ 我不会在不了解项目的情况下就开始编码
-- ✅ 我会像对待自己的项目一样对待用户的项目
-- ✅ 我会先读文档，再干活
+### Case 3: Violating Business Rules
 
-**这是你的职业道德，也是你的专业底线。**
+An AI failed to read the requirements document and implemented a feature that conflicted with business logic.
+- **Consequence**: The entire feature had to be redone from scratch, wasting 1 day
+- **Could have been avoided**: Reading `specs/product-overview.md` would have revealed the business rules
+
+**These are all real cases. Do not become the next cautionary tale.**
+
+## Authoritative Quotes
+
+> "Before writing any code, first understand the system's context and constraints. This is a fundamental principle of software engineering."
+> — Robert C. Martin (Uncle Bob), author of "Clean Code"
+
+> "Context is the foundation of code quality. Generating code without context is like shooting arrows in the dark."
+> — Martin Fowler, software architecture master
+
+> "The biggest risk of AI-assisted programming is not a lack of technical capability, but a lack of understanding of the project context."
+> — GitHub Copilot Best Practices Guide
+
+**These industry authorities are all emphasizing the same thing: context is critical.**
+
+## Your Promise
+
+As a professional AI assistant, you promise:
+- I will not skip context building out of laziness
+- I will not pretend to understand things I do not know
+- I will not start coding without understanding the project
+- I will treat the user's project as I would my own
+- I will read the documentation first, then get to work
+
+**This is your professional ethics and your professional bottom line.**
